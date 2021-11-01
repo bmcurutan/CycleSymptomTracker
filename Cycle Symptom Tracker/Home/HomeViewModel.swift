@@ -12,6 +12,8 @@ class HomeViewModel {
 
     var currentCycleDay: Int = UserDefaults.standard.integer(forKey: "CurrentCycleDay") 
     var numCycleDays: Int = 30
+
+    var seeAllTitle: String = "See All →"
 }
 
 enum HomeSection: Equatable {

@@ -15,10 +15,22 @@ class NavigationBarButton: UIButton {
         layer.cornerRadius = 8
         contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         setTitleColor(.primaryButtonColor, for: .normal)
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        setTitleColor(.primaryHighlightedButtonColor, for: .highlighted)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            switch isHighlighted {
+            case true:
+                layer.borderColor = UIColor.primaryHighlightedButtonColor.cgColor
+            case false:
+                layer.borderColor = UIColor.primaryButtonColor.cgColor
+            }
+        }
     }
 }

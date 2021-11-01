@@ -38,6 +38,10 @@ extension UIColor {
         return UIColor(rgb: 0xee6c4d) // orange
     }
 
+    static var primaryHighlightedButtonColor: UIColor {
+        return UIColor(rgb: 0xee6c4d).withAlphaComponent(0.5) // orange with alpha
+    }
+
     static var highlightColor: UIColor {
         return UIColor(rgb: 0xe0fbfc) // light blue
     }

@@ -19,6 +19,7 @@
 		67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */; };
 		67A4BFAA272F688C0050079A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4BFA9272F688B0050079A /* SectionHeaderView.swift */; };
 		67D0C068272F9DD0003B0D09 /* NavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */; };
+		67D0C06C272FAE1F003B0D09 /* HomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C06B272FAE1F003B0D09 /* HomeTableViewCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		67A4BFA9272F688B0050079A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarButton.swift; sourceTree = "<group>"; };
+		67D0C06B272FAE1F003B0D09 /* HomeTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				678CE682272DE17B00994B9B /* HomeViewController.swift */,
 				678CE685272DE1B500994B9B /* HomeViewModel.swift */,
+				67D0C06B272FAE1F003B0D09 /* HomeTableViewCells.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67D0C06C272FAE1F003B0D09 /* HomeTableViewCells.swift in Sources */,
 				67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */,
 				678CE683272DE17B00994B9B /* HomeViewController.swift in Sources */,
 				678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */,

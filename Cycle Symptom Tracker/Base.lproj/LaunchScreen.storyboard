@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.clockwise.heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9qn-8K-4hp">
-                                <rect key="frame" x="16" y="61.5" width="382" height="783.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.clockwise.heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9qn-8K-4hp">
+                                <rect key="frame" x="16" y="61" width="382" height="783.5"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9qn-8K-4hp" secondAttribute="height" multiplier="382:305" id="cfL-mh-eKs"/>

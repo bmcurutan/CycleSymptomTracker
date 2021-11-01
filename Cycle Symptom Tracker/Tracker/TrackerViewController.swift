@@ -13,11 +13,11 @@
 import UIKit
 
 class TrackerViewController: UIViewController {
-    private var viewModel = TrackerViewModel()
+    private var viewModel = TrackerViewModel() // TODO pass from Home
 
     private var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .backgroundColor
+        tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
