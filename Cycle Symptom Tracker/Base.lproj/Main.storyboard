@@ -29,11 +29,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TXP-Hs-LKp" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="UIImage()" id="eIl-Ww-9B4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eIl-Ww-9B4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.38823529411764707" green="0.16862745098039217" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.38823529410000002" green="0.16862745100000001" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -49,7 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="UIImage()" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

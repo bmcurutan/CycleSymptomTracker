@@ -10,7 +10,15 @@ import UIKit
 // https://www.color-hex.com/color-palette/37363
 extension UIColor {
     static var backgroundColor: UIColor {
-        return UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0) // FAFAFA Very light gray // TODO dark mode
+        return UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0) // fafafa very light gray // TODO dark mode
+    }
+
+    static var headerBackgroundColor: UIColor {
+        return UIColor(red: 252/255, green: 195/255, blue: 163/255, alpha: 1.0) // fcc3a3 light orange
+    }
+
+    static var bodyBackgroundColor: UIColor {
+        return UIColor(red: 240/255, green: 159/255, blue: 156/255, alpha: 1.0) // f09f9c orange
     }
 
 //    static var borderColor: UIColor {

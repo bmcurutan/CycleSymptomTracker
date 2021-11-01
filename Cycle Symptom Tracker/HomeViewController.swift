@@ -17,6 +17,12 @@ class HomeViewController: UIViewController {
         return tableView
     }()
 
+    private var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        return formatter
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.title
@@ -25,30 +31,42 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.register(TodayTableViewCell.self, forCellReuseIdentifier: "TodayTableViewCell")
         tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
-        tableView.separatorStyle = .none
+//        tableView.separatorStyle = .none
 
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: tableView.rightAnchor).isActive = true
         view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
+
+        // TODO remove
+        UserDefaults.standard.setValue(5, forKey: "CurrentCycleDay")
     }
 }
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : viewModel.numDays
+        switch viewModel.sections[section] {
+        case .today:
+            return 1
+        default:
+            return viewModel.currentCycleDay
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
+        switch viewModel.sections[indexPath.section] {
+        case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
-            cell.textLabel?.text = "Today: \(Date())"
+            cell.title = "Day \(viewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()))"
+            cell.backgroundColor = UIColor.headerBackgroundColor.withAlphaComponent(0.5)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
-            cell.textLabel?.text = "Day \(indexPath.row + 1)"
+            let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
+            let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
+            cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate))"
+            cell.backgroundColor = UIColor.bodyBackgroundColor.withAlphaComponent(0.5)
             return cell
         }
     }
@@ -56,29 +74,81 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return viewModel.sections.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
         navigationController?.pushViewController(TrackerViewController(), animated: true)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = section == 0 ? nil : "History"
-        return label
+        let header = SectionHeaderView()
+        switch viewModel.sections[section] {
+        case let .today(title):
+            header.title = title
+            header.backgroundColor = .headerBackgroundColor
+        case let .history(title):
+            header.title = title
+            header.backgroundColor = .bodyBackgroundColor
+        }
+        return header
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? .leastNonzeroMagnitude : UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
 }
 
-class TodayTableViewCell: UITableViewCell {
+private class SectionHeaderView: UIView {
+    var title: String? {
+        didSet {
+            titleLabel.text = title?.uppercased()
+        }
+    }
+
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private class TodayTableViewCell: UITableViewCell {
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
     }
 
     required init?(coder: NSCoder) {
@@ -87,9 +157,27 @@ class TodayTableViewCell: UITableViewCell {
 }
 
 
-class HistoryTableViewCell: UITableViewCell {
+private class HistoryTableViewCell: UITableViewCell {
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
     }
 
     required init?(coder: NSCoder) {
