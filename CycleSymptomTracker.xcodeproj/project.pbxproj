@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		678CE665272DDEFE00994B9B /* Cycle Symptom Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cycle Symptom Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		678CE665272DDEFE00994B9B /* CycleSymptomTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleSymptomTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		678CE668272DDEFE00994B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		678CE66A272DDEFE00994B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		678CE66C272DDEFE00994B9B /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		678CE65C272DDEFE00994B9B = {
 			isa = PBXGroup;
 			children = (
-				678CE667272DDEFE00994B9B /* Cycle Symptom Tracker */,
+				678CE667272DDEFE00994B9B /* CycleSymptomTracker */,
 				678CE666272DDEFE00994B9B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,12 +62,12 @@
 		678CE666272DDEFE00994B9B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				678CE665272DDEFE00994B9B /* Cycle Symptom Tracker.app */,
+				678CE665272DDEFE00994B9B /* CycleSymptomTracker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		678CE667272DDEFE00994B9B /* Cycle Symptom Tracker */ = {
+		678CE667272DDEFE00994B9B /* CycleSymptomTracker */ = {
 			isa = PBXGroup;
 			children = (
 				67A4BFAC272F68960050079A /* Home */,
@@ -81,7 +81,7 @@
 				678CE671272DDF0E00994B9B /* Assets.xcassets */,
 				678CE676272DDF0E00994B9B /* Info.plist */,
 			);
-			path = "Cycle Symptom Tracker";
+			path = CycleSymptomTracker;
 			sourceTree = "<group>";
 		};
 		67A4BFAC272F68960050079A /* Home */ = {
@@ -123,9 +123,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		678CE664272DDEFE00994B9B /* Cycle Symptom Tracker */ = {
+		678CE664272DDEFE00994B9B /* CycleSymptomTracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 678CE679272DDF0F00994B9B /* Build configuration list for PBXNativeTarget "Cycle Symptom Tracker" */;
+			buildConfigurationList = 678CE679272DDF0F00994B9B /* Build configuration list for PBXNativeTarget "CycleSymptomTracker" */;
 			buildPhases = (
 				678CE661272DDEFE00994B9B /* Sources */,
 				678CE662272DDEFE00994B9B /* Frameworks */,
@@ -135,9 +135,9 @@
 			);
 			dependencies = (
 			);
-			name = "Cycle Symptom Tracker";
+			name = CycleSymptomTracker;
 			productName = "Cycle Symptom Tracker";
-			productReference = 678CE665272DDEFE00994B9B /* Cycle Symptom Tracker.app */;
+			productReference = 678CE665272DDEFE00994B9B /* CycleSymptomTracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -154,7 +154,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 678CE660272DDEFE00994B9B /* Build configuration list for PBXProject "Cycle Symptom Tracker" */;
+			buildConfigurationList = 678CE660272DDEFE00994B9B /* Build configuration list for PBXProject "CycleSymptomTracker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -167,7 +167,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				678CE664272DDEFE00994B9B /* Cycle Symptom Tracker */,
+				678CE664272DDEFE00994B9B /* CycleSymptomTracker */,
 			);
 		};
 /* End PBXProject section */
@@ -348,7 +348,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22FG2JE75X;
-				INFOPLIST_FILE = "Cycle Symptom Tracker/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CycleSymptomTracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,7 +356,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bmcurutan.Cycle-Symptom-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -367,7 +367,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22FG2JE75X;
-				INFOPLIST_FILE = "Cycle Symptom Tracker/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CycleSymptomTracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,14 +375,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bmcurutan.Cycle-Symptom-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		678CE660272DDEFE00994B9B /* Build configuration list for PBXProject "Cycle Symptom Tracker" */ = {
+		678CE660272DDEFE00994B9B /* Build configuration list for PBXProject "CycleSymptomTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				678CE677272DDF0E00994B9B /* Debug */,
@@ -391,7 +391,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		678CE679272DDF0F00994B9B /* Build configuration list for PBXNativeTarget "Cycle Symptom Tracker" */ = {
+		678CE679272DDF0F00994B9B /* Build configuration list for PBXNativeTarget "CycleSymptomTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				678CE67A272DDF0F00994B9B /* Debug */,
