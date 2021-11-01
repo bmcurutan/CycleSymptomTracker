@@ -25,15 +25,13 @@ class TrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let rightButton: UIButton = {
-            let button = UIButton()
+        let saveButton: NavigationBarButton = {
+            let button = NavigationBarButton()
             button.setTitle("SAVE", for: .normal)
-            button.setTitleColor(.accentColor, for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-//            button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+// TODO            button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
             return button
         }()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
 
         tableView.dataSource = self
         tableView.delegate = self

@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
 
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, yyyy"
+        formatter.dateFormat = "MM/dd/yyyy"
         return formatter
     }()
 
@@ -28,15 +28,9 @@ class HomeViewController: UIViewController {
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        let restartButton: UIButton = {
-            let button = UIButton()
-            button.layer.borderColor = UIColor.primaryButtonColor.cgColor
-            button.layer.borderWidth = 1
-            button.layer.cornerRadius = 8
-            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        let restartButton: NavigationBarButton = {
+            let button = NavigationBarButton()
             button.setTitle("RESTART CYCLE", for: .normal)
-            button.setTitleColor(.primaryButtonColor, for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
             button.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
             return button
         }()
@@ -46,7 +40,6 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.register(TodayTableViewCell.self, forCellReuseIdentifier: "TodayTableViewCell")
         tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
-//        tableView.separatorStyle = .none
 
         view.addSubview(tableView)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -55,11 +48,11 @@ class HomeViewController: UIViewController {
         view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
 
         // TODO remove
-        UserDefaults.standard.setValue(5, forKey: "CurrentCycleDay")
+        UserDefaults.standard.setValue(10, forKey: "CurrentCycleDay")
     }
 
     @objc private func restartButtonTapped() {
-        // TODO
+        UserDefaults.standard.setValue(0, forKey: "CurrentCycleDay")
     }
 }
 
@@ -77,14 +70,14 @@ extension HomeViewController: UITableViewDataSource {
         switch viewModel.sections[indexPath.section] {
         case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
-            cell.title = "Day \(viewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()))"
+            cell.title = "DAY \(viewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
 //            cell.backgroundColor = UIColor.headerBackgroundColor.withAlphaComponent(0.5)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
             let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
-            cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate))"
+            cell.title = "DAY \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
 //            cell.backgroundColor = UIColor.bodyBackgroundColor.withAlphaComponent(0.5)
             return cell
         }
@@ -110,6 +103,8 @@ extension HomeViewController: UITableViewDelegate {
         case let .history(title):
             header.title = title
 //            header.backgroundColor = .bodyBackgroundColor
+        case let .analysis(title):
+            header.title = title
         }
         return header
     }
@@ -136,6 +131,8 @@ private class TodayTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .highlightColor
+
         contentView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
