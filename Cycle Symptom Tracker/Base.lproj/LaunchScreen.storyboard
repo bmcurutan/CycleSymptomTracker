@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,31 +15,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cycle Symptom Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzV-Wd-cVc">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <color key="textColor" red="0.38823529410000002" green="0.16862745100000001" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.clockwise.heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9qn-8K-4hp">
+                                <rect key="frame" x="16" y="61.5" width="382" height="783.5"/>
+                                <color key="tintColor" red="0.8784313725490196" green="0.98431372549019602" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9qn-8K-4hp" secondAttribute="height" multiplier="382:305" id="cfL-mh-eKs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cycle Symptom Tracker" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzV-Wd-cVc">
+                                <rect key="frame" x="16" y="60" width="382" height="786"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="56"/>
+                                <color key="textColor" red="0.23921568627450979" green="0.3529411764705882" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GzV-Wd-cVc" secondAttribute="trailing" id="c0P-i4-JC2"/>
-                            <constraint firstItem="GzV-Wd-cVc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="htM-2h-wVQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GzV-Wd-cVc" secondAttribute="bottom" id="qbZ-0k-f3m"/>
-                            <constraint firstItem="GzV-Wd-cVc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sCS-3F-ru7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9qn-8K-4hp" secondAttribute="trailing" constant="16" id="8mt-cd-x5E"/>
+                            <constraint firstItem="9qn-8K-4hp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="REQ-Vw-FHX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GzV-Wd-cVc" secondAttribute="trailing" constant="16" id="c0P-i4-JC2"/>
+                            <constraint firstItem="GzV-Wd-cVc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="htM-2h-wVQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9qn-8K-4hp" secondAttribute="bottom" constant="16" id="qYL-HW-Hv5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GzV-Wd-cVc" secondAttribute="bottom" constant="16" id="qbZ-0k-f3m"/>
+                            <constraint firstItem="9qn-8K-4hp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="rbN-Wn-0eo"/>
+                            <constraint firstItem="GzV-Wd-cVc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sCS-3F-ru7"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="arrow.clockwise.heart" catalog="system" width="128" height="109"/>
     </resources>
 </document>

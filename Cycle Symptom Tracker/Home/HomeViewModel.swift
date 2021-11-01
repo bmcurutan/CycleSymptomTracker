@@ -8,7 +8,7 @@
 import Foundation
 
 class HomeViewModel {
-    var sections: [HomeSection] = [.today("Today"), .history("History")]
+    var sections: [HomeSection] = [.today("Today"), .history("History"), .analysis("Analysis")]
 
     var currentCycleDay: Int = UserDefaults.standard.integer(forKey: "CurrentCycleDay") 
     var numCycleDays: Int = 30
@@ -17,6 +17,7 @@ class HomeViewModel {
 enum HomeSection: Equatable {
     case today(String)
     case history(String)
+    case analysis(String)
 
     static func == (lhs: HomeSection, rhs: HomeSection) -> Bool {
         switch (lhs, rhs) {

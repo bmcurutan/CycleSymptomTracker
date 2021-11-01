@@ -7,51 +7,53 @@
 
 import UIKit
 
-// https://www.color-hex.com/color-palette/37363
+// https://venngage.com/blog/blue-color-palettes/
+// Burnt Sienna Orange + Bedazzled Blue Color Palette
 extension UIColor {
     static var backgroundColor: UIColor {
-        return UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0) // fafafa very light gray // TODO dark mode
+        return UIColor(rgb: 0xfafafa) // very light gray
     }
 
-//    static var headerBackgroundColor: UIColor {
-//        return UIColor(red: 252/255, green: 195/255, blue: 163/255, alpha: 1.0) // fcc3a3 light orange
-//    }
-//
-//    static var bodyBackgroundColor: UIColor {
-//        return UIColor(red: 240/255, green: 159/255, blue: 156/255, alpha: 1.0) // f09f9c orange
-//    }
-
     static var borderColor: UIColor {
-        return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0) // DCDCDC Light gray
+        return UIColor(rgb: 0xdcdcdc) // light gray
     }
 
     static var accentColor: UIColor {
-        return UIColor(red: 99/255, green: 43/255, blue: 108/255, alpha: 1.0) // #632b6c purple
+        return UIColor(red: 99/255, green: 43/255, blue: 108/255, alpha: 1.0) // #632b6c purple // TODO
     }
 
-//    static var lightAccentColor: UIColor {
-//        return UIColor(red: 248/255, green: 99/255, blue: 81/255, alpha: 1.0) // #f86351 orange
-////        return UIColor(red: 251/255, green: 164/255, blue: 101/255, alpha: 1.0) // #fba465 Light orange
-//    }
-//
-//    static var darkAccentColor: UIColor {
-//        return UIColor(red: 209/255, green: 25/255, blue: 62/255, alpha: 1.0) // #d1193e dark red
-//    }
-//
+    static var headerTextColor: UIColor {
+        return UIColor(rgb: 0x3d5a80) // dark slate
+    }
+
     static var primaryTextColor: UIColor {
-        return UIColor(red: 39/255, green: 15/255, blue: 54/255, alpha: 1.0) // #270f36 dark purple
+        return UIColor(rgb: 0x293241) // dark black-blue
     }
 
-//    static var secondaryTextColor: UIColor {
-//        return UIColor.lightGray
-//    }
-//
-//    static var primaryButtonColor: UIColor {
-//        return UIColor(red: 238/255, green: 62/255, blue: 56/255, alpha: 1.0) // #ee3e38 orange-red
-//    }
+    static var secondaryTextColor: UIColor {
+        return UIColor.lightGray
+    }
 
-//    static var highlightColor: UIColor {
-//        return UIColor(red: 242/255, green: 200/255, blue: 92/255, alpha: 1.0) // #f2c85b yellow
-//    }
+    static var primaryButtonColor: UIColor {
+        return UIColor(rgb: 0xee6c4d) // orange
+    }
+
+    static var highlightColor: UIColor {
+        return UIColor(rgb: 0xe0fbfc) // light blue
+    }
+
+    // Usage: UIColor(red: 0xFF, green: 0xFF, blue: 0xFF)
+    convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+        self.init(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: 1.0)
+    }
+
+    // Usage: UIColor(rgb: 0xFFFFFF)
+    convenience init(rgb: Int) {
+        self.init(red: (rgb >> 16) & 0xFF, green: (rgb >> 8) & 0xFF,blue: rgb & 0xFF)
+    }
 }
 

@@ -25,6 +25,16 @@ class TrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let rightButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("SAVE", for: .normal)
+            button.setTitleColor(.accentColor, for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+//            button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+            return button
+        }()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(SymptomTableViewCell.self, forCellReuseIdentifier: "SymptomTableViewCell")
@@ -67,10 +77,6 @@ extension TrackerViewController: UITableViewDelegate {
         return viewModel.sections.count
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = SectionHeaderView()
         switch viewModel.sections[section] {
@@ -102,13 +108,29 @@ private class SymptomTableViewCell: UITableViewCell {
         return label
     }()
 
+    private var slider: UISlider = {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 10
+        slider.tintColor = .accentColor
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
+
         contentView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
+
+        contentView.addSubview(slider)
+        slider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        slider.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: slider.bottomAnchor, constant: 8).isActive = true
+        contentView.rightAnchor.constraint(equalTo: slider.rightAnchor, constant: 16).isActive = true
     }
 
     required init?(coder: NSCoder) {
@@ -121,6 +143,7 @@ private class NotesTableViewCell: UITableViewCell {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.borderColor.cgColor
         textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 8
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = .primaryTextColor
         textView.tintColor = .accentColor

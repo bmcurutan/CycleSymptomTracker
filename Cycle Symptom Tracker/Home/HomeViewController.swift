@@ -26,15 +26,21 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let rightButton: UIButton = {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+        let restartButton: UIButton = {
             let button = UIButton()
+            button.layer.borderColor = UIColor.primaryButtonColor.cgColor
+            button.layer.borderWidth = 1
+            button.layer.cornerRadius = 8
+            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
             button.setTitle("RESTART CYCLE", for: .normal)
-            button.setTitleColor(.accentColor, for: .normal)
+            button.setTitleColor(.primaryButtonColor, for: .normal)
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-//            button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
             return button
         }()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: restartButton)
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -50,6 +56,10 @@ class HomeViewController: UIViewController {
 
         // TODO remove
         UserDefaults.standard.setValue(5, forKey: "CurrentCycleDay")
+    }
+
+    @objc private func restartButtonTapped() {
+        // TODO
     }
 }
 
