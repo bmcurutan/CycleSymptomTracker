@@ -17,6 +17,7 @@
 		678CE683272DE17B00994B9B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678CE682272DE17B00994B9B /* HomeViewController.swift */; };
 		678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678CE685272DE1B500994B9B /* HomeViewModel.swift */; };
 		67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */; };
+		67A4BFAA272F688C0050079A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4BFA9272F688B0050079A /* SectionHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		678CE682272DE17B00994B9B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		678CE685272DE1B500994B9B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		67A4BFA9272F688B0050079A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,19 +66,52 @@
 		678CE667272DDEFE00994B9B /* Cycle Symptom Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				67A4BFAC272F68960050079A /* Home */,
+				67A4BFAD272F68AA0050079A /* Tracker */,
+				67A4BFAE272F68B90050079A /* UI */,
+				67A4BFAF272F68CD0050079A /* Extensions */,
 				678CE668272DDEFE00994B9B /* AppDelegate.swift */,
 				678CE66A272DDEFE00994B9B /* SceneDelegate.swift */,
-				678CE682272DE17B00994B9B /* HomeViewController.swift */,
-				678CE685272DE1B500994B9B /* HomeViewModel.swift */,
-				678CE66C272DDEFE00994B9B /* TrackerViewController.swift */,
-				678CE67E272DDFA000994B9B /* TrackerViewModel.swift */,
-				67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */,
+				678CE673272DDF0E00994B9B /* LaunchScreen.storyboard */,
 				678CE66E272DDEFE00994B9B /* Main.storyboard */,
 				678CE671272DDF0E00994B9B /* Assets.xcassets */,
-				678CE673272DDF0E00994B9B /* LaunchScreen.storyboard */,
 				678CE676272DDF0E00994B9B /* Info.plist */,
 			);
 			path = "Cycle Symptom Tracker";
+			sourceTree = "<group>";
+		};
+		67A4BFAC272F68960050079A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				678CE682272DE17B00994B9B /* HomeViewController.swift */,
+				678CE685272DE1B500994B9B /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		67A4BFAD272F68AA0050079A /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				678CE66C272DDEFE00994B9B /* TrackerViewController.swift */,
+				678CE67E272DDFA000994B9B /* TrackerViewModel.swift */,
+			);
+			path = Tracker;
+			sourceTree = "<group>";
+		};
+		67A4BFAE272F68B90050079A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				67A4BFA9272F688B0050079A /* SectionHeaderView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		67A4BFAF272F68CD0050079A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +187,7 @@
 				67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */,
 				678CE683272DE17B00994B9B /* HomeViewController.swift in Sources */,
 				678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */,
+				67A4BFAA272F688C0050079A /* SectionHeaderView.swift in Sources */,
 				678CE66D272DDEFE00994B9B /* TrackerViewController.swift in Sources */,
 				678CE67F272DDFA000994B9B /* TrackerViewModel.swift in Sources */,
 				678CE669272DDEFE00994B9B /* AppDelegate.swift in Sources */,

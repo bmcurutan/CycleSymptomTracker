@@ -8,12 +8,10 @@
 import Foundation
 
 class HomeViewModel {
-    var title: String = "Cycle Symptom Tracker"
+    var sections: [HomeSection] = [.today("Today"), .history("History")]
 
     var currentCycleDay: Int = UserDefaults.standard.integer(forKey: "CurrentCycleDay") 
     var numCycleDays: Int = 30
-
-    var sections: [HomeSection] = [.today("Today"), .history("History")]
 }
 
 enum HomeSection: Equatable {

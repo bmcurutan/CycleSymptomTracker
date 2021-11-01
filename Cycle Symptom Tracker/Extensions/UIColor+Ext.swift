@@ -13,18 +13,18 @@ extension UIColor {
         return UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0) // fafafa very light gray // TODO dark mode
     }
 
-    static var headerBackgroundColor: UIColor {
-        return UIColor(red: 252/255, green: 195/255, blue: 163/255, alpha: 1.0) // fcc3a3 light orange
-    }
-
-    static var bodyBackgroundColor: UIColor {
-        return UIColor(red: 240/255, green: 159/255, blue: 156/255, alpha: 1.0) // f09f9c orange
-    }
-
-//    static var borderColor: UIColor {
-//        return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0) // DCDCDC Light gray
+//    static var headerBackgroundColor: UIColor {
+//        return UIColor(red: 252/255, green: 195/255, blue: 163/255, alpha: 1.0) // fcc3a3 light orange
 //    }
 //
+//    static var bodyBackgroundColor: UIColor {
+//        return UIColor(red: 240/255, green: 159/255, blue: 156/255, alpha: 1.0) // f09f9c orange
+//    }
+
+    static var borderColor: UIColor {
+        return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0) // DCDCDC Light gray
+    }
+
     static var accentColor: UIColor {
         return UIColor(red: 99/255, green: 43/255, blue: 108/255, alpha: 1.0) // #632b6c purple
     }
@@ -38,10 +38,10 @@ extension UIColor {
 //        return UIColor(red: 209/255, green: 25/255, blue: 62/255, alpha: 1.0) // #d1193e dark red
 //    }
 //
-//    static var primaryTextColor: UIColor {
-//        return UIColor(red: 58/255, green: 7/255, blue: 81/255, alpha: 1.0) // #3a0751 Dark purple
-//    }
-//
+    static var primaryTextColor: UIColor {
+        return UIColor(red: 39/255, green: 15/255, blue: 54/255, alpha: 1.0) // #270f36 dark purple
+    }
+
 //    static var secondaryTextColor: UIColor {
 //        return UIColor.lightGray
 //    }

@@ -25,7 +25,16 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.title
+
+        let rightButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("RESTART CYCLE", for: .normal)
+            button.setTitleColor(.accentColor, for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+//            button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+            return button
+        }()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -59,14 +68,14 @@ extension HomeViewController: UITableViewDataSource {
         case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
             cell.title = "Day \(viewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()))"
-            cell.backgroundColor = UIColor.headerBackgroundColor.withAlphaComponent(0.5)
+//            cell.backgroundColor = UIColor.headerBackgroundColor.withAlphaComponent(0.5)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
             let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
             cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate))"
-            cell.backgroundColor = UIColor.bodyBackgroundColor.withAlphaComponent(0.5)
+//            cell.backgroundColor = UIColor.bodyBackgroundColor.withAlphaComponent(0.5)
             return cell
         }
     }
@@ -87,44 +96,16 @@ extension HomeViewController: UITableViewDelegate {
         switch viewModel.sections[section] {
         case let .today(title):
             header.title = title
-            header.backgroundColor = .headerBackgroundColor
+//            header.backgroundColor = .headerBackgroundColor
         case let .history(title):
             header.title = title
-            header.backgroundColor = .bodyBackgroundColor
+//            header.backgroundColor = .bodyBackgroundColor
         }
         return header
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
-    }
-}
-
-private class SectionHeaderView: UIView {
-    var title: String? {
-        didSet {
-            titleLabel.text = title?.uppercased()
-        }
-    }
-
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-        rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -138,6 +119,7 @@ private class TodayTableViewCell: UITableViewCell {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .primaryTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -167,6 +149,7 @@ private class HistoryTableViewCell: UITableViewCell {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .primaryTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
