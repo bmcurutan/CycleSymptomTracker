@@ -30,6 +30,7 @@
 		67D0C068272F9DD0003B0D09 /* NavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */; };
 		67D0C06C272FAE1F003B0D09 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */; };
 		67D574D12731D0A6002426C6 /* SectionSubheaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D574D02731D0A6002426C6 /* SectionSubheaderTableViewCell.swift */; };
+		67D574D42731D198002426C6 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D574D32731D198002426C6 /* AnalysisViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarButton.swift; sourceTree = "<group>"; };
 		67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		67D574D02731D0A6002426C6 /* SectionSubheaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSubheaderTableViewCell.swift; sourceTree = "<group>"; };
+		67D574D32731D198002426C6 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		DD2069CC5205B45AFA4C5F54 /* Pods_CycleSymptomTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleSymptomTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 				67A5C11C2730B28000974EE5 /* InfoViewController.swift */,
 				67A5C12E2730E3B400974EE5 /* HistoryViewController.swift */,
 				678CE66C272DDEFE00994B9B /* TrackerViewController.swift */,
+				67D574D32731D198002426C6 /* AnalysisViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				678CE66D272DDEFE00994B9B /* TrackerViewController.swift in Sources */,
 				678CE67F272DDFA000994B9B /* TrackerViewModel.swift in Sources */,
 				67A5C1242730C1B500974EE5 /* UIView+Ext.swift in Sources */,
+				67D574D42731D198002426C6 /* AnalysisViewController.swift in Sources */,
 				678CE669272DDEFE00994B9B /* AppDelegate.swift in Sources */,
 				67D0C068272F9DD0003B0D09 /* NavigationBarButton.swift in Sources */,
 				67A5C1372731BA3300974EE5 /* AnalysisTableViewCell.swift in Sources */,

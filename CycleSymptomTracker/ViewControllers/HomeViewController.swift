@@ -76,7 +76,13 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func restartButtonTapped() {
-        UserDefaults.standard.setValue(0, forKey: "CurrentCycleDay")
+        let alert = UIAlertController(title: nil, message: homeViewModel.restartAlert, preferredStyle: .alert)
+        alert.view.tintColor = .primaryButtonColor
+        alert.addAction(UIAlertAction(title: homeViewModel.restart, style: .default, handler: { _ in
+            UserDefaults.standard.setValue(0, forKey: "CurrentCycleDay")
+        }))
+        alert.addAction(UIAlertAction(title: homeViewModel.cancel, style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 
@@ -169,7 +175,7 @@ extension HomeViewController: SectionHeaderViewDelegate {
         case .history:
             navigationController?.pushViewController(HistoryViewController(), animated: true)
         case .analysis:
-            break // TODO
+            navigationController?.pushViewController(AnalysisViewController(), animated: true)
         default:
             break
         }

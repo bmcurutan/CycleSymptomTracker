@@ -19,31 +19,37 @@ class TrackerViewModel {
                                   "Depression",
                                   "Teariness",
                                   "Lack of interest in daily activities"],
-                       type: .emotional)
-//        .mental("Mental", ["Anxiety",
-//                           "Self-deprecating thoughts",
-//                           "Mental fog",
-//                           "Memory issues",
-//                           "Speech issues",
-//                           "Trouble concentrating",
-//                           "Excess time on phone"]),
-//        .physical("Physical", ["Bloating",
-//                               "Breast tenderness",
-//                               "Sugar cravings",
-//                               "Overall cravings",
-//                               "Tiredness / low energy"]),
-//        .yesNo("Yes/No Questions", ["Cramps",
-//                                    "Headaches",
-//                                    "Acne",
-//                                    "Coordination issues",
-//                                    "Joint/muscle pain",
-//                                    "Back pain",
-//                                    "Panic attacks",
-//                                    "Obsessive thoughts",
-//                                    "Relationship conflicts",
-//                                    "Insomnia",
-//                                    "Nightmares"]),
-//                   .notes("Notes")
+                       type: .emotional),
+        TrackerSection(title: "Mental",
+                       symptoms: ["Anxiety",
+                                  "Self-deprecating thoughts",
+                                  "Mental fog",
+                                  "Memory issues",
+                                  "Speech issues",
+                                  "Trouble concentrating",
+                                  "Excess time on phone"],
+                       type: .mental),
+        TrackerSection(title: "Physical",
+                       symptoms: ["Bloating",
+                                  "Breast tenderness",
+                                  "Sugar cravings",
+                                  "Overall cravings",
+                                  "Tiredness / low energy"],
+                       type: .physical),
+        TrackerSection(title: "Yes/No Questions",
+                       symptoms: ["Cramps",
+                                  "Headaches",
+                                  "Acne",
+                                  "Coordination issues",
+                                  "Joint/muscle pain",
+                                  "Back pain",
+                                  "Panic attacks",
+                                  "Obsessive thoughts",
+                                  "Relationship conflicts",
+                                  "Insomnia",
+                                  "Nightmares"],
+                       type: .yesNo),
+        TrackerSection(title: "Notes", type: .notes)
     ]
 }
 
@@ -54,9 +60,9 @@ struct TrackerSection {
 
     enum SymptomType: Equatable {
         case emotional
-    //    case mental(String, [String])
-    //    case physical(String, [String])
-    //    case yesNo(String, [String])
+        case mental
+        case physical
+        case yesNo
         case notes
 
         static func == (lhs: SymptomType, rhs: SymptomType) -> Bool {

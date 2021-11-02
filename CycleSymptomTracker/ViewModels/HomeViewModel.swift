@@ -16,6 +16,10 @@ class HomeViewModel {
     var seeAllTitle: String = "See All →"
     var todaySubtitleNotCompleted: String = "Tap to track today's symptoms"
     var todaySubtitleCompleted: String = "Tap to see today's symptoms"
+
+    var restartAlert: String = "Are you sure you want to restart cycle?"
+    var restart: String = "Restart"
+    var cancel: String = "Cancel"
 }
 
 enum HomeSection: Equatable {
