@@ -19,14 +19,14 @@ extension UIColor {
     }
 
     static var accentColor: UIColor {
-        return UIColor(red: 99/255, green: 43/255, blue: 108/255, alpha: 1.0) // #632b6c purple // TODO
+        return UIColor(rgb: 0x98c1d9) // light slate
     }
 
-    static var headerTextColor: UIColor {
+    static var headerColor: UIColor {
         return UIColor(rgb: 0x3d5a80) // dark slate
     }
 
-    static var headerHighlightedTextColor: UIColor {
+    static var headerHighlightedColor: UIColor {
         return UIColor(rgb: 0x3d5a80).withAlphaComponent(0.5) // dark slate with alpha
     }
 

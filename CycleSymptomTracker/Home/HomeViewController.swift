@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
         let iconButton: UIButton = {
             let button = UIButton(type: .custom)
             button.setImage(UIImage(systemName: "arrow.clockwise.heart"), for: .normal)
-            button.setImage(UIImage(systemName: "arrow.clockwise.heart")?.withTintColor(.headerHighlightedTextColor, renderingMode: .alwaysOriginal), for: .highlighted)
+            button.setImage(UIImage(systemName: "arrow.clockwise.heart")?.withTintColor(.headerHighlightedColor, renderingMode: .alwaysOriginal), for: .highlighted)
             button.imageView?.translatesAutoresizingMaskIntoConstraints = false
             button.imageView?.widthAnchor.constraint(equalToConstant: 32).isActive = true
             button.imageView?.heightAnchor.constraint(equalToConstant: 32).isActive = true

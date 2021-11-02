@@ -16,7 +16,7 @@ class NavigationBarButton: UIButton {
         contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         setTitleColor(.primaryButtonColor, for: .normal)
         setTitleColor(.primaryHighlightedButtonColor, for: .highlighted)
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
 
     required init?(coder: NSCoder) {

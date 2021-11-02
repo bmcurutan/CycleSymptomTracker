@@ -11,7 +11,7 @@ import UIKit
 class TodayTableViewCell: UITableViewCell {
     var isCompleted: Bool = false {
         didSet {
-            icon.image = isCompleted ? UIImage(systemName: "checkmark.square") : UIImage(systemName: "square")
+            icon.image = isCompleted ? UIImage(systemName: "checkmark.circle") : UIImage(systemName: "plus.circle")
         }
     }
 
@@ -21,20 +21,25 @@ class TodayTableViewCell: UITableViewCell {
         }
     }
 
-    private var icon: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "square")?.withRenderingMode(.alwaysTemplate))
-        imageView.tintColor = .primaryTextColor
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .primaryTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private var cycleImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "arrow.clockwise"))
+        imageView.tintColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .primaryTextColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private var icon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "square")?.withTintColor(.primaryTextColor, renderingMode: .alwaysOriginal))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     private var chartView: LineChartView = {
@@ -45,25 +50,31 @@ class TodayTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        contentView.backgroundColor = .highlightColor
-
-        contentView.addSubview(icon)
-        icon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        icon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        icon.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        icon.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
         contentView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: icon.rightAnchor, constant: 8).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
         contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
 
-        contentView.addSubview(chartView)
-        chartView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
-        chartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 8).isActive = true
-        contentView.rightAnchor.constraint(equalTo: chartView.rightAnchor, constant: 16).isActive = true
-        chartView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        contentView.addSubview(cycleImageView)
+        cycleImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+        cycleImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: cycleImageView.bottomAnchor, constant: 16).isActive = true
+        cycleImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        cycleImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
+//        contentView.addSubview(icon)
+//        icon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+//        icon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+//        icon.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        icon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
+//        contentView.addSubview(chartView)
+//        chartView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+//        chartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+//        contentView.bottomAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 8).isActive = true
+//        contentView.rightAnchor.constraint(equalTo: chartView.rightAnchor, constant: 16).isActive = true
+//        chartView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 
         // TODO remove
         var lineChartEntry = [ChartDataEntry]()
@@ -111,7 +122,7 @@ class HistoryTableViewCell: UITableViewCell {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .primaryTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -147,7 +158,7 @@ class AnalysisTableViewCell: UITableViewCell {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .primaryTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -172,7 +183,7 @@ extension UIView {
         if let _ = layer.sublayers?.first as? CAGradientLayer { return }
         let gradient = CAGradientLayer()
         gradient.frame = bounds
-        gradient.colors = [UIColor.highlightColor.cgColor, UIColor.white.cgColor]
+        gradient.colors = [UIColor.accentColor.cgColor, UIColor.highlightColor.cgColor]
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
         layer.insertSublayer(gradient, at: 0)

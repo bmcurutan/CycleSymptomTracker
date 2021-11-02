@@ -142,7 +142,7 @@ private class NotesTableViewCell: UITableViewCell {
         textView.layer.borderColor = UIColor.borderColor.cgColor
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 8
-        textView.font = UIFont.systemFont(ofSize: 14)
+        textView.font = UIFont.systemFont(ofSize: 16)
         textView.textColor = .primaryTextColor
         textView.tintColor = .accentColor
         textView.translatesAutoresizingMaskIntoConstraints = false

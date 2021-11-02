@@ -15,14 +15,14 @@ class InfoViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.textColor = .headerTextColor
+        label.textColor = .headerColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private var bodyLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.textColor = .primaryTextColor

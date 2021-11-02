@@ -35,7 +35,7 @@ class SectionHeaderView: UIView {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -45,14 +45,14 @@ class SectionHeaderView: UIView {
         let button = UIButton()
         button.isHidden = true
         button.setTitleColor(.primaryButtonColor, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .headerTextColor
+        backgroundColor = .headerColor
 
         addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
