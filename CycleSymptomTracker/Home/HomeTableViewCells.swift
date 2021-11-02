@@ -66,10 +66,10 @@ class TodayTableViewCell: UITableViewCell {
         return label
     }()
 
-    private var chartView: LineChartView = {
-        let view = LineChartView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private var chartView: CleanScatterChartView = {
+        let chartView = CleanScatterChartView()
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        return chartView
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -88,7 +88,6 @@ class TodayTableViewCell: UITableViewCell {
         contentView.addSubview(icon)
         icon.topAnchor.constraint(equalTo: cycleCardView.bottomAnchor, constant: 16).isActive = true
         icon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16).isActive = true
         icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
         icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
@@ -102,24 +101,24 @@ class TodayTableViewCell: UITableViewCell {
         subtitleLabel.leftAnchor.constraint(equalTo: icon.rightAnchor, constant: 8).isActive = true
         contentView.rightAnchor.constraint(equalTo: subtitleLabel.rightAnchor, constant: 16).isActive = true
 
-        contentView.bottomAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 16).isActive = true
+        contentView.addSubview(chartView)
+        chartView.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16).isActive = true
+        chartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 16).isActive = true
+        contentView.rightAnchor.constraint(equalTo: chartView.rightAnchor, constant: 16).isActive = true
+        chartView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 
-//        contentView.addSubview(chartView)
-//        chartView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
-//        chartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-//        contentView.bottomAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 8).isActive = true
-//        contentView.rightAnchor.constraint(equalTo: chartView.rightAnchor, constant: 16).isActive = true
-//        chartView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-
-        // TODO remove
+        // TODO clean up / remove
         var lineChartEntry = [ChartDataEntry]()
-        for i in 0..<10 {
+        for i in 0..<12 {
             let value = ChartDataEntry(x: Double(i), y: Double(i))
             lineChartEntry.append(value)
         }
-        let line1 = LineChartDataSet(entries: lineChartEntry, label: "B")
-        line1.colors = [NSUIColor.blue]
-        let data = LineChartData()
+        let line1 = ScatterChartDataSet(entries: lineChartEntry, label: nil)
+        line1.setScatterShape(.circle)
+        line1.scatterShapeSize = 8
+        line1.colors = [.primaryButtonColor]
+        let data = ScatterChartData()
         data.addDataSet(line1)
         chartView.data = data
     }
@@ -203,6 +202,13 @@ class HistoryTableViewCell: UITableViewCell {
         return label
     }()
 
+    private var chevron: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "chevron.right")?.withRenderingMode(.alwaysTemplate))
+        imageView.tintColor = .secondaryTextColor
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -213,10 +219,16 @@ class HistoryTableViewCell: UITableViewCell {
         icon.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
         contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: icon.rightAnchor, constant: 8).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
         contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
+
+        contentView.addSubview(chevron)
+        contentView.rightAnchor.constraint(equalTo: chevron.rightAnchor, constant: 16).isActive = true
+        chevron.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        chevron.widthAnchor.constraint(equalToConstant: 12).isActive = true
+        chevron.heightAnchor.constraint(equalToConstant: 16).isActive = true
     }
 
     required init?(coder: NSCoder) {
@@ -242,9 +254,9 @@ class AnalysisTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
         contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
     }
 

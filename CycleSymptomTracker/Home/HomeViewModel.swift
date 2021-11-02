@@ -14,8 +14,8 @@ class HomeViewModel {
     var numCycleDays: Int = 30
 
     var seeAllTitle: String = "See All →"
-    var todaySubtitleNotCompleted: String = "Track today's symptoms"
-    var todaySubtitleCompleted: String = "See today's symptoms"
+    var todaySubtitleNotCompleted: String = "Tap to track today's symptoms"
+    var todaySubtitleCompleted: String = "Tap to see today's symptoms"
 }
 
 enum HomeSection: Equatable {

@@ -27,7 +27,7 @@ extension UIColor {
     }
 
     static var headerHighlightedColor: UIColor {
-        return UIColor(rgb: 0x3d5a80).withAlphaComponent(0.5) // dark slate with alpha
+        return UIColor(rgb: 0x3d5a80).withAlphaComponent(0.4) // dark slate with alpha
     }
 
     static var primaryTextColor: UIColor {
@@ -43,7 +43,7 @@ extension UIColor {
     }
 
     static var primaryHighlightedButtonColor: UIColor {
-        return UIColor(rgb: 0xee6c4d).withAlphaComponent(0.5) // orange with alpha
+        return UIColor(rgb: 0xee6c4d).withAlphaComponent(0.4) // orange with alpha
     }
 
     static var highlightColor: UIColor {
