@@ -95,7 +95,9 @@ extension HomeViewController: UITableViewDataSource {
         switch homeViewModel.sections[indexPath.section] {
         case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
+            cell.isCompleted = true // TODO
             cell.title = "Day \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
+            cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleNotCompleted
             return cell
         case .history:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell

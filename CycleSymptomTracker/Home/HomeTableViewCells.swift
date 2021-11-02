@@ -11,7 +11,7 @@ import UIKit
 class TodayTableViewCell: UITableViewCell {
     var isCompleted: Bool = false {
         didSet {
-            icon.image = isCompleted ? UIImage(systemName: "checkmark.circle") : UIImage(systemName: "plus.circle")
+            icon.image = isCompleted ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "plus.circle.fill")
         }
     }
 
@@ -21,13 +21,11 @@ class TodayTableViewCell: UITableViewCell {
         }
     }
 
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .primaryTextColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    var subtitle: String? {
+        didSet {
+            subtitleLabel.text = subtitle
+        }
+    }
 
     private var cycleCardView: TodayCardView = {
         let view = TodayCardView()
@@ -45,27 +43,27 @@ class TodayTableViewCell: UITableViewCell {
         return view
     }()
 
-//    private var cycleImageView: UIImageView = {
-//        let imageView = UIImageView(image: UIImage(systemName: "arrow.clockwise"))
-//        imageView.tintColor = .white
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        return imageView
-//    }()
-//
-//    private var cycleTitleLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = UIFont.boldSystemFont(ofSize: 18)
-//        label.text = "Cycle length - 30 days"
-//        label.textColor = .white
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-//
     private var icon: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "plus.circle"))
-        imageView.tintColor = .white
+        let imageView = UIImageView(image: UIImage(systemName: "plus.circle.fill"))
+        imageView.tintColor = .primaryButtonColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .headerColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .primaryTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     private var chartView: LineChartView = {
@@ -87,30 +85,24 @@ class TodayTableViewCell: UITableViewCell {
         trackedCardView.leftAnchor.constraint(equalTo: cycleCardView.rightAnchor, constant: 8).isActive = true
         trackedCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
 
-        contentView.bottomAnchor.constraint(equalTo: cycleCardView.bottomAnchor, constant: 16).isActive = true
+        contentView.addSubview(icon)
+        icon.topAnchor.constraint(equalTo: cycleCardView.bottomAnchor, constant: 16).isActive = true
+        icon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16).isActive = true
+        icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-//        contentView.addSubview(titleLabel)
-//        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-//        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-//        contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
-//
-//        contentView.addSubview(cycleImageView)
-//        cycleImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-//        cycleImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
-//        cycleImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-//        cycleImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//
-//        contentView.addSubview(cycleTitleLabel)
-//        cycleTitleLabel.leftAnchor.constraint(equalTo: cycleImageView.rightAnchor, constant: 8).isActive = true
-//        contentView.rightAnchor.constraint(equalTo: cycleTitleLabel.rightAnchor, constant: 16).isActive = true
-//        cycleTitleLabel.centerYAnchor.constraint(equalTo: cycleImageView.centerYAnchor).isActive = true
-//
-//        contentView.addSubview(icon)
-//        icon.topAnchor.constraint(equalTo: cycleImageView.bottomAnchor, constant: 8).isActive = true
-//        icon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-//        contentView.bottomAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16).isActive = true
-//        icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
-//        icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        contentView.addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: icon.topAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: icon.rightAnchor, constant: 8).isActive = true
+        contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
+
+        contentView.addSubview(subtitleLabel)
+        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
+        subtitleLabel.leftAnchor.constraint(equalTo: icon.rightAnchor, constant: 8).isActive = true
+        contentView.rightAnchor.constraint(equalTo: subtitleLabel.rightAnchor, constant: 16).isActive = true
+
+        contentView.bottomAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 16).isActive = true
 
 //        contentView.addSubview(chartView)
 //        chartView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
@@ -138,7 +130,7 @@ class TodayTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.addHorizontalGradient()
+        contentView.addVerticalGradient()
     }
 }
 
