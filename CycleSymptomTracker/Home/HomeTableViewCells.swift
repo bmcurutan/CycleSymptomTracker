@@ -29,10 +29,18 @@ class TodayTableViewCell: UITableViewCell {
         return label
     }()
 
-    private var cycleView: TodayCardView = {
+    private var cycleCardView: TodayCardView = {
         let view = TodayCardView()
         view.topLabel.text = "CYCLE LENGTH"
         view.bottomLabel.text = "30 days"
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private var trackedCardView: TodayCardView = {
+        let view = TodayCardView()
+        view.topLabel.text = "DAYS TRACKED"
+        view.bottomLabel.text = "\(UserDefaults.standard.integer(forKey: "CurrentCycleDay"))"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -69,12 +77,17 @@ class TodayTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        contentView.addSubview(cycleView)
-        cycleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        cycleView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        cycleView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2).isActive = true
+        let cardWidth = (UIScreen.main.bounds.width - 16 - 8 - 16) / 2
+        contentView.addSubview(cycleCardView)
+        cycleCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        cycleCardView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        cycleCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
+        contentView.addSubview(trackedCardView)
+        trackedCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        trackedCardView.leftAnchor.constraint(equalTo: cycleCardView.rightAnchor, constant: 8).isActive = true
+        trackedCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
 
-        contentView.bottomAnchor.constraint(equalTo: cycleView.bottomAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: cycleCardView.bottomAnchor, constant: 16).isActive = true
 
 //        contentView.addSubview(titleLabel)
 //        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
