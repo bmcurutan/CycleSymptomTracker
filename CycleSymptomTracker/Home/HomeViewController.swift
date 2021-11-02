@@ -95,7 +95,7 @@ extension HomeViewController: UITableViewDataSource {
         switch homeViewModel.sections[indexPath.section] {
         case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
-            cell.title = "DAY \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
+            cell.title = "Day \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
             return cell
         case .history:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
@@ -103,7 +103,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.isCompleted = indexPath.row % 2 == 1 ? true : false // TODO
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
             let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
-            cell.title = "DAY \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
+            cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
             return cell
         case .analysis:
             let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
