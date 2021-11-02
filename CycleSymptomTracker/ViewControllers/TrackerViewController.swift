@@ -13,7 +13,8 @@
 import UIKit
 
 class TrackerViewController: UIViewController {
-    private var viewModel = TrackerViewModel() // TODO pass from Home
+    // TODO pass from Home
+    private var viewModel = TrackerViewModel()
 
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -49,9 +50,10 @@ class TrackerViewController: UIViewController {
 
 extension TrackerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch viewModel.sections[section] {
-        case let .emotional(_, symptoms):
-            return symptoms.count
+        let trackerSection = viewModel.sections[section]
+        switch trackerSection.type {
+        case .emotional:
+            return trackerSection.symptoms.count
         default:
             return 1
         }
@@ -77,11 +79,12 @@ extension TrackerViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = SectionHeaderView()
-        switch viewModel.sections[section] {
-        case let .emotional(title, _):
-            header.title = title
-        case let .notes(title):
-            header.title = title
+        let trackerSection = viewModel.sections[section]
+        switch trackerSection.type {
+        case .emotional:
+            header.title = trackerSection.title
+//        case let .notes(title):
+//            header.title = title
         default:
             break
         }

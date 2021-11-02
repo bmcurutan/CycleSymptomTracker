@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
         tableView.register(TodayTableViewCell.self, forCellReuseIdentifier: "TodayTableViewCell")
         tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
         tableView.register(AnalysisTableViewCell.self, forCellReuseIdentifier: "AnalysisTableViewCell")
+        tableView.register(SectionSubheaderTableViewCell.self, forCellReuseIdentifier: "SectionSubheaderTableViewCell")
         tableView.separatorStyle = .none
 
         view.addSubview(tableView)
@@ -87,7 +88,8 @@ extension HomeViewController: UITableViewDataSource {
         case .history:
             return min(homeViewModel.currentCycleDay, maxRows)
         case .analysis:
-            return 10 // TODO min(trackerViewModel.scaledSymptoms.count, maxRows)
+            // We already know sections.first.symptoms.count > maxRows
+            return maxRows + 1 // + subheader
         }
     }
 
@@ -108,10 +110,18 @@ extension HomeViewController: UITableViewDataSource {
             cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
             return cell
         case .analysis:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
-//            cell.title = trackerViewModel.scaledSymptoms[indexPath.row]
-            return cell
+            let trackerSection = trackerViewModel.sections.first
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SectionSubheaderTableViewCell", for: indexPath) as! SectionSubheaderTableViewCell
+                cell.title = trackerSection?.title.uppercased()
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
+                cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
+                cell.title = trackerViewModel.sections.first?.symptoms[indexPath.row - 1]
+                return cell
+            }
         }
     }
 }
@@ -141,9 +151,7 @@ extension HomeViewController: UITableViewDelegate {
             }
         case let .analysis(title):
             header.title = title
-//            if trackerViewModel.scaledSymptoms.count > maxRows {
-//                header.buttonTitle = homeViewModel.seeAllTitle
-//            }
+            header.buttonTitle = homeViewModel.seeAllTitle
         }
         return header
     }
