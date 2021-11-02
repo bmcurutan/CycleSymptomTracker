@@ -50,8 +50,8 @@ class TrackerViewController: UIViewController {
 extension TrackerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch viewModel.sections[section] {
-        case .symptoms:
-            return viewModel.symptoms.count
+        case let .emotional(_, symptoms):
+            return symptoms.count
         default:
             return 1
         }
@@ -59,10 +59,10 @@ extension TrackerViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch viewModel.sections[indexPath.section] {
-        case .symptoms:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SymptomTableViewCell", for: indexPath) as! SymptomTableViewCell
-            cell.title = viewModel.symptoms[indexPath.row]
-            return cell
+//        case .symptoms:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "SymptomTableViewCell", for: indexPath) as! SymptomTableViewCell
+//            cell.title = viewModel.scaledSymptoms[indexPath.row]
+//            return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
             return cell
@@ -78,10 +78,12 @@ extension TrackerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = SectionHeaderView()
         switch viewModel.sections[section] {
-        case let .symptoms(title):
+        case let .emotional(title, _):
             header.title = title
         case let .notes(title):
             header.title = title
+        default:
+            break
         }
         return header
     }

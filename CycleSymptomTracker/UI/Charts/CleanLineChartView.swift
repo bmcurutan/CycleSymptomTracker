@@ -1,5 +1,5 @@
 //
-//  CleanScatterChartView.swift
+//  CleanLineChartView.swift
 //  CycleSymptomTracker
 //
 //  Created by Bianca Curutan on 11/1/21.
@@ -8,10 +8,11 @@
 import Charts
 import UIKit
 
-class CleanScatterChartView: ScatterChartView {
+class CleanLineChartView: LineChartView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        layer.cornerRadius = 8
+        clipsToBounds = true
         backgroundColor = UIColor.white.withAlphaComponent(0.4)
         isUserInteractionEnabled = false
         chartDescription?.enabled = false

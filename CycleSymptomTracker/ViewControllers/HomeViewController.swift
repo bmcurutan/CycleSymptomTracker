@@ -87,7 +87,7 @@ extension HomeViewController: UITableViewDataSource {
         case .history:
             return min(homeViewModel.currentCycleDay, maxRows)
         case .analysis:
-            return min(trackerViewModel.symptoms.count, maxRows)
+            return 10 // TODO min(trackerViewModel.scaledSymptoms.count, maxRows)
         }
     }
 
@@ -97,7 +97,7 @@ extension HomeViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
             cell.isCompleted = true // TODO
             cell.title = "Day \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
-            cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleNotCompleted
+            cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleCompleted
             return cell
         case .history:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
@@ -110,7 +110,7 @@ extension HomeViewController: UITableViewDataSource {
         case .analysis:
             let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
             cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
-            cell.title = trackerViewModel.symptoms[indexPath.row]
+//            cell.title = trackerViewModel.scaledSymptoms[indexPath.row]
             return cell
         }
     }
@@ -141,9 +141,9 @@ extension HomeViewController: UITableViewDelegate {
             }
         case let .analysis(title):
             header.title = title
-            if trackerViewModel.symptoms.count > maxRows {
-                header.buttonTitle = homeViewModel.seeAllTitle
-            }
+//            if trackerViewModel.scaledSymptoms.count > maxRows {
+//                header.buttonTitle = homeViewModel.seeAllTitle
+//            }
         }
         return header
     }
@@ -159,7 +159,7 @@ extension HomeViewController: SectionHeaderViewDelegate {
 
         switch homeViewModel.sections[section] {
         case .history:
-            break // TODO
+            navigationController?.pushViewController(HistoryViewController(), animated: true)
         case .analysis:
             break // TODO
         default:
