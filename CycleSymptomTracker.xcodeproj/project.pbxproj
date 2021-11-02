@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A58EA1E3FA03848ED6BED19 /* Pods_CycleSymptomTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD2069CC5205B45AFA4C5F54 /* Pods_CycleSymptomTracker.framework */; };
 		678CE669272DDEFE00994B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678CE668272DDEFE00994B9B /* AppDelegate.swift */; };
 		678CE66B272DDEFE00994B9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678CE66A272DDEFE00994B9B /* SceneDelegate.swift */; };
 		678CE66D272DDEFE00994B9B /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678CE66C272DDEFE00994B9B /* TrackerViewController.swift */; };
@@ -18,11 +19,15 @@
 		678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678CE685272DE1B500994B9B /* HomeViewModel.swift */; };
 		67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */; };
 		67A4BFAA272F688C0050079A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4BFA9272F688B0050079A /* SectionHeaderView.swift */; };
+		67A5C11D2730B28000974EE5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C11C2730B28000974EE5 /* InfoViewController.swift */; };
+		67A5C1202730B29C00974EE5 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C11F2730B29C00974EE5 /* InfoViewModel.swift */; };
 		67D0C068272F9DD0003B0D09 /* NavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */; };
 		67D0C06C272FAE1F003B0D09 /* HomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C06B272FAE1F003B0D09 /* HomeTableViewCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A65EFF0C63BF29527FCC066 /* Pods-CycleSymptomTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleSymptomTracker.release.xcconfig"; path = "Target Support Files/Pods-CycleSymptomTracker/Pods-CycleSymptomTracker.release.xcconfig"; sourceTree = "<group>"; };
+		3D2DAB47067E5F96CAC4F36F /* Pods-CycleSymptomTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleSymptomTracker.debug.xcconfig"; path = "Target Support Files/Pods-CycleSymptomTracker/Pods-CycleSymptomTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		678CE665272DDEFE00994B9B /* CycleSymptomTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleSymptomTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		678CE668272DDEFE00994B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		678CE66A272DDEFE00994B9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,8 +41,11 @@
 		678CE685272DE1B500994B9B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		67A4BFA6272F5BFB0050079A /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		67A4BFA9272F688B0050079A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		67A5C11C2730B28000974EE5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		67A5C11F2730B29C00974EE5 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarButton.swift; sourceTree = "<group>"; };
 		67D0C06B272FAE1F003B0D09 /* HomeTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCells.swift; sourceTree = "<group>"; };
+		DD2069CC5205B45AFA4C5F54 /* Pods_CycleSymptomTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleSymptomTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +53,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A58EA1E3FA03848ED6BED19 /* Pods_CycleSymptomTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		486BB9C0FFBC358C43B780BE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3D2DAB47067E5F96CAC4F36F /* Pods-CycleSymptomTracker.debug.xcconfig */,
+				1A65EFF0C63BF29527FCC066 /* Pods-CycleSymptomTracker.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		678CE65C272DDEFE00994B9B = {
 			isa = PBXGroup;
 			children = (
 				678CE667272DDEFE00994B9B /* CycleSymptomTracker */,
 				678CE666272DDEFE00994B9B /* Products */,
+				486BB9C0FFBC358C43B780BE /* Pods */,
+				8033697743339E1CDE4990F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				67A4BFAC272F68960050079A /* Home */,
+				67A5C11B2730B26D00974EE5 /* Info */,
 				67A4BFAD272F68AA0050079A /* Tracker */,
 				67A4BFAE272F68B90050079A /* UI */,
 				67A4BFAF272F68CD0050079A /* Extensions */,
@@ -120,6 +141,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		67A5C11B2730B26D00974EE5 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				67A5C11C2730B28000974EE5 /* InfoViewController.swift */,
+				67A5C11F2730B29C00974EE5 /* InfoViewModel.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		8033697743339E1CDE4990F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD2069CC5205B45AFA4C5F54 /* Pods_CycleSymptomTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -127,9 +165,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 678CE679272DDF0F00994B9B /* Build configuration list for PBXNativeTarget "CycleSymptomTracker" */;
 			buildPhases = (
+				1E3F8AF5ADA9E9E1E06809F6 /* [CP] Check Pods Manifest.lock */,
 				678CE661272DDEFE00994B9B /* Sources */,
 				678CE662272DDEFE00994B9B /* Frameworks */,
 				678CE663272DDEFE00994B9B /* Resources */,
+				D2FB37FD8C0B6D637114BF47 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,12 +225,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E3F8AF5ADA9E9E1E06809F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CycleSymptomTracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2FB37FD8C0B6D637114BF47 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CycleSymptomTracker/Pods-CycleSymptomTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CycleSymptomTracker/Pods-CycleSymptomTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CycleSymptomTracker/Pods-CycleSymptomTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		678CE661272DDEFE00994B9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				67D0C06C272FAE1F003B0D09 /* HomeTableViewCells.swift in Sources */,
+				67A5C11D2730B28000974EE5 /* InfoViewController.swift in Sources */,
+				67A5C1202730B29C00974EE5 /* InfoViewModel.swift in Sources */,
 				67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */,
 				678CE683272DE17B00994B9B /* HomeViewController.swift in Sources */,
 				678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */,
@@ -343,6 +427,7 @@
 		};
 		678CE67A272DDF0F00994B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D2DAB47067E5F96CAC4F36F /* Pods-CycleSymptomTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -362,6 +447,7 @@
 		};
 		678CE67B272DDF0F00994B9B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A65EFF0C63BF29527FCC066 /* Pods-CycleSymptomTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

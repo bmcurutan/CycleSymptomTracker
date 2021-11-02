@@ -5,6 +5,7 @@
 //  Created by Bianca Curutan on 10/31/21.
 //
 
+import Charts
 import UIKit
 
 class TodayTableViewCell: UITableViewCell {
@@ -36,6 +37,12 @@ class TodayTableViewCell: UITableViewCell {
         return label
     }()
 
+    private var chartView: LineChartView = {
+        let view = LineChartView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 //        contentView.backgroundColor = .highlightColor
@@ -49,8 +56,26 @@ class TodayTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: icon.rightAnchor, constant: 8).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
+
+        contentView.addSubview(chartView)
+        chartView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+        chartView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: chartView.bottomAnchor, constant: 8).isActive = true
+        contentView.rightAnchor.constraint(equalTo: chartView.rightAnchor, constant: 16).isActive = true
+        chartView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
+        // TODO remove
+        var lineChartEntry = [ChartDataEntry]()
+        for i in 0..<10 {
+            let value = ChartDataEntry(x: Double(i), y: Double(i))
+            lineChartEntry.append(value)
+        }
+        let line1 = LineChartDataSet(entries: lineChartEntry, label: "B")
+        line1.colors = [NSUIColor.blue]
+        let data = LineChartData()
+        data.addDataSet(line1)
+        chartView.data = data
     }
 
     required init?(coder: NSCoder) {

@@ -49,29 +49,29 @@ class HomeViewController: UIViewController {
     private func setUpNavigationBar() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        let icon: UIImageView = {
-            let imageView = UIImageView(image: UIImage(systemName: "arrow.clockwise.heart"))
-            imageView.alpha = 0.8
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-            return imageView
+        let iconButton: UIButton = {
+            let button = UIButton(type: .custom)
+            button.setImage(UIImage(systemName: "arrow.clockwise.heart"), for: .normal)
+            button.setImage(UIImage(systemName: "arrow.clockwise.heart")?.withTintColor(.headerHighlightedTextColor, renderingMode: .alwaysOriginal), for: .highlighted)
+            button.imageView?.translatesAutoresizingMaskIntoConstraints = false
+            button.imageView?.widthAnchor.constraint(equalToConstant: 32).isActive = true
+            button.imageView?.heightAnchor.constraint(equalToConstant: 32).isActive = true
+            return button
         }()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: icon)
-//        if let navigationBar = navigationController?.navigationBar {
-//            navigationBar.addSubview(icon)
-//            icon.leftAnchor.constraint(equalTo: navigationBar.leftAnchor, constant: 16).isActive = true
-
-//            icon.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor).isActive = true
-//        }
+        iconButton.addTarget(self, action: #selector(iconButtonTapped), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iconButton)
 
         let restartButton: NavigationBarButton = {
             let button = NavigationBarButton()
             button.setTitle("RESTART CYCLE", for: .normal)
-            button.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
             return button
         }()
+        restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: restartButton)
+    }
+
+    @objc private func iconButtonTapped() {
+        present(InfoViewController(), animated: true, completion: nil)
     }
 
     @objc private func restartButtonTapped() {

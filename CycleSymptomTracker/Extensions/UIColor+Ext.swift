@@ -26,6 +26,10 @@ extension UIColor {
         return UIColor(rgb: 0x3d5a80) // dark slate
     }
 
+    static var headerHighlightedTextColor: UIColor {
+        return UIColor(rgb: 0x3d5a80).withAlphaComponent(0.5) // dark slate with alpha
+    }
+
     static var primaryTextColor: UIColor {
         return UIColor(rgb: 0x293241) // dark black-blue
     }
