@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
 
     private var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .backgroundColor
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -48,8 +48,6 @@ class HomeViewController: UIViewController {
     }
 
     private func setUpNavigationBar() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
         let iconButton: UIButton = {
             let button = UIButton(type: .custom)
             button.setImage(UIImage(systemName: "arrow.clockwise.heart"), for: .normal)
@@ -109,7 +107,7 @@ extension HomeViewController: UITableViewDataSource {
             return cell
         case .history:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
+            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
             cell.isCompleted = indexPath.row % 2 == 1 ? true : false // TODO
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
             let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
@@ -124,7 +122,7 @@ extension HomeViewController: UITableViewDataSource {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
-                cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
+                cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
                 cell.title = trackerViewModel.sections.first?.symptoms[indexPath.row - 1]
                 return cell
             }
@@ -139,7 +137,7 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        navigationController?.pushViewController(TrackerViewController(), animated: true)
+        navigationController?.pushViewController(TrackerViewController(viewModel: trackerViewModel), animated: true)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -173,9 +171,9 @@ extension HomeViewController: SectionHeaderViewDelegate {
 
         switch homeViewModel.sections[section] {
         case .history:
-            navigationController?.pushViewController(HistoryViewController(), animated: true)
+            navigationController?.pushViewController(HistoryViewController(homeViewModel: homeViewModel, trackerViewModel: trackerViewModel, dateFormatter: dateFormatter), animated: true)
         case .analysis:
-            navigationController?.pushViewController(AnalysisViewController(), animated: true)
+            navigationController?.pushViewController(AnalysisViewController(viewModel: trackerViewModel, dateFormatter: dateFormatter), animated: true)
         default:
             break
         }

@@ -13,15 +13,24 @@
 import UIKit
 
 class TrackerViewController: UIViewController {
-    // TODO pass from Home
-    private var viewModel = TrackerViewModel()
+    private var viewModel: TrackerViewModel
 
     private var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .backgroundColor
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+
+    init(viewModel: TrackerViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.title = title
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +77,12 @@ extension TrackerViewController: UITableViewDataSource {
             return cell
         case .yesNo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "YesNoTableViewCell", for: indexPath) as! YesNoTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
+            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
             cell.title = trackerSection.symptoms[indexPath.row]
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SymptomTableViewCell", for: indexPath) as! SymptomTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .clear
+            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
             cell.title = trackerSection.symptoms[indexPath.row]
             return cell
         }
@@ -115,7 +124,9 @@ private class SymptomTableViewCell: UITableViewCell {
         let slider = UISlider()
         slider.minimumValue = 0
         slider.maximumValue = 10
-        slider.tintColor = .accentColor
+        slider.thumbTintColor = .accentColor
+        slider.minimumTrackTintColor = .accentColor
+        slider.maximumTrackTintColor = .borderColor
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -186,12 +197,14 @@ private class YesNoTableViewCell: UITableViewCell {
         return label
     }()
 
-    private var picker: UIPickerView = {
-        let view = UIPickerView()
-// TODO
-        view.tintColor = .accentColor
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private var control: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["Yes", "No"])
+        control.tintColor = .red
+        control.layer.borderColor = UIColor.borderColor.cgColor
+        control.layer.borderWidth = 1
+        control.selectedSegmentTintColor = .accentColor
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -203,14 +216,19 @@ private class YesNoTableViewCell: UITableViewCell {
         titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
         contentView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 16).isActive = true
 
-        contentView.addSubview(picker)
-        picker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-        picker.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: picker.bottomAnchor, constant: 12).isActive = true
-        contentView.rightAnchor.constraint(equalTo: picker.rightAnchor, constant: 16).isActive = true
+        contentView.addSubview(control)
+        control.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        control.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: control.bottomAnchor, constant: 12).isActive = true
+        contentView.rightAnchor.constraint(equalTo: control.rightAnchor, constant: 16).isActive = true
+        control.addTarget(self, action: #selector(segmentedControlChanged), for: .touchUpInside)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc private func segmentedControlChanged() {
+        // TODO
     }
 }

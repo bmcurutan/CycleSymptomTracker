@@ -29,7 +29,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TXP-Hs-LKp" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="eIl-Ww-9B4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" shadowImage="UIImage()" id="eIl-Ww-9B4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,6 +52,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="UIImage()" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
