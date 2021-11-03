@@ -38,7 +38,7 @@ class TrackerViewController: UIViewController {
 
         let saveButton: NavigationBarButton = {
             let button = NavigationBarButton()
-            button.setTitle("SAVE", for: .normal)
+            button.title = "Save"
             button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
             return button
         }()
@@ -177,7 +177,7 @@ private class SymptomTableViewCell: UITableViewCell {
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
 
         contentView.addSubview(sliderValues)
-        sliderValues.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 8).isActive = true
+        sliderValues.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 4).isActive = true
         sliderValues.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
         contentView.bottomAnchor.constraint(equalTo: sliderValues.bottomAnchor, constant: 12).isActive = true
         contentView.rightAnchor.constraint(equalTo: sliderValues.rightAnchor, constant: 8).isActive = true

@@ -1,5 +1,5 @@
 //
-//  HistoryTableViewCell.swift
+//  CurrentCycleTableViewCell.swift
 //  CycleSymptomTracker
 //
 //  Created by Bianca Curutan on 11/2/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistoryTableViewCell: UITableViewCell {
+class CurrentCycleTableViewCell: UITableViewCell {
     var isCompleted: Bool = false {
         didSet {
             icon.image = isCompleted ? UIImage(systemName: "checkmark.square") : UIImage(systemName: "square")

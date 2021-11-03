@@ -8,7 +8,7 @@
 import Foundation
 
 class HomeViewModel {
-    var sections: [HomeSection] = [.today("Today"), .history("History"), .analysis("Analysis")]
+    var sections: [HomeSection] = [.today("Today"), .currentCycle("Current Cycle"), .analysis("Analysis")]
 
     var currentCycleDay: Int = UserDefaults.standard.integer(forKey: "CurrentCycleDay") 
     var numCycleDays: Int = 30
@@ -24,14 +24,14 @@ class HomeViewModel {
 
 enum HomeSection: Equatable {
     case today(String)
-    case history(String)
+    case currentCycle(String)
     case analysis(String)
 
     static func == (lhs: HomeSection, rhs: HomeSection) -> Bool {
         switch (lhs, rhs) {
         case (.today, .today):
             return true
-        case (.history, .history):
+        case (.currentCycle, .currentCycle):
             return true
         default:
             return false

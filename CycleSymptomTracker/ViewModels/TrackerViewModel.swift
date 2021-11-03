@@ -8,6 +8,8 @@
 import Foundation
 
 class TrackerViewModel {
+    var info: String = "Only data from the current cycle is displayed here. To access all historic data, use the Export function."
+
     var sections: [TrackerSection] = [
         TrackerSection(title: "Emotional",
                        symptoms: ["Anger",

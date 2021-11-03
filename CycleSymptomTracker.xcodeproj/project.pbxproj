@@ -24,8 +24,8 @@
 		67A5C1242730C1B500974EE5 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C1232730C1B500974EE5 /* UIView+Ext.swift */; };
 		67A5C1272730E0B900974EE5 /* CleanScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C1262730E0B900974EE5 /* CleanScatterChartView.swift */; };
 		67A5C12A2730E17F00974EE5 /* CleanLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C1292730E17F00974EE5 /* CleanLineChartView.swift */; };
-		67A5C12F2730E3B400974EE5 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C12E2730E3B400974EE5 /* HistoryViewController.swift */; };
-		67A5C1332731BA1700974EE5 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C1322731BA1700974EE5 /* HistoryTableViewCell.swift */; };
+		67A5C12F2730E3B400974EE5 /* CurrentCycleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C12E2730E3B400974EE5 /* CurrentCycleViewController.swift */; };
+		67A5C1332731BA1700974EE5 /* CurrentCycleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C1322731BA1700974EE5 /* CurrentCycleTableViewCell.swift */; };
 		67A5C1372731BA3300974EE5 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5C1362731BA3300974EE5 /* AnalysisTableViewCell.swift */; };
 		67D0C068272F9DD0003B0D09 /* NavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */; };
 		67D0C06C272FAE1F003B0D09 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */; };
@@ -54,8 +54,8 @@
 		67A5C1232730C1B500974EE5 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		67A5C1262730E0B900974EE5 /* CleanScatterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanScatterChartView.swift; sourceTree = "<group>"; };
 		67A5C1292730E17F00974EE5 /* CleanLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanLineChartView.swift; sourceTree = "<group>"; };
-		67A5C12E2730E3B400974EE5 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
-		67A5C1322731BA1700974EE5 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		67A5C12E2730E3B400974EE5 /* CurrentCycleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCycleViewController.swift; sourceTree = "<group>"; };
+		67A5C1322731BA1700974EE5 /* CurrentCycleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCycleTableViewCell.swift; sourceTree = "<group>"; };
 		67A5C1362731BA3300974EE5 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarButton.swift; sourceTree = "<group>"; };
 		67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			children = (
 				678CE682272DE17B00994B9B /* HomeViewController.swift */,
 				67A5C11C2730B28000974EE5 /* InfoViewController.swift */,
-				67A5C12E2730E3B400974EE5 /* HistoryViewController.swift */,
+				67A5C12E2730E3B400974EE5 /* CurrentCycleViewController.swift */,
 				678CE66C272DDEFE00994B9B /* TrackerViewController.swift */,
 				67D574D32731D198002426C6 /* AnalysisViewController.swift */,
 			);
@@ -166,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */,
-				67A5C1322731BA1700974EE5 /* HistoryTableViewCell.swift */,
+				67A5C1322731BA1700974EE5 /* CurrentCycleTableViewCell.swift */,
 				67A5C1362731BA3300974EE5 /* AnalysisTableViewCell.swift */,
 				67D574D02731D0A6002426C6 /* SectionSubheaderTableViewCell.swift */,
 			);
@@ -314,7 +314,7 @@
 				678CE683272DE17B00994B9B /* HomeViewController.swift in Sources */,
 				678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */,
 				67A4BFAA272F688C0050079A /* SectionHeaderView.swift in Sources */,
-				67A5C1332731BA1700974EE5 /* HistoryTableViewCell.swift in Sources */,
+				67A5C1332731BA1700974EE5 /* CurrentCycleTableViewCell.swift in Sources */,
 				678CE66D272DDEFE00994B9B /* TrackerViewController.swift in Sources */,
 				678CE67F272DDFA000994B9B /* TrackerViewModel.swift in Sources */,
 				67A5C1242730C1B500974EE5 /* UIView+Ext.swift in Sources */,
@@ -322,7 +322,7 @@
 				678CE669272DDEFE00994B9B /* AppDelegate.swift in Sources */,
 				67D0C068272F9DD0003B0D09 /* NavigationBarButton.swift in Sources */,
 				67A5C1372731BA3300974EE5 /* AnalysisTableViewCell.swift in Sources */,
-				67A5C12F2730E3B400974EE5 /* HistoryViewController.swift in Sources */,
+				67A5C12F2730E3B400974EE5 /* CurrentCycleViewController.swift in Sources */,
 				678CE66B272DDEFE00994B9B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

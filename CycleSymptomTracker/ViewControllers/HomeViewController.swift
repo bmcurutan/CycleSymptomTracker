@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TodayTableViewCell.self, forCellReuseIdentifier: "TodayTableViewCell")
-        tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
+        tableView.register(CurrentCycleTableViewCell.self, forCellReuseIdentifier: "CurrentCycleTableViewCell")
         tableView.register(AnalysisTableViewCell.self, forCellReuseIdentifier: "AnalysisTableViewCell")
         tableView.register(SectionSubheaderTableViewCell.self, forCellReuseIdentifier: "SectionSubheaderTableViewCell")
         tableView.separatorStyle = .none
@@ -63,10 +63,10 @@ class HomeViewController: UIViewController {
 
         let restartButton: NavigationBarButton = {
             let button = NavigationBarButton()
-            button.setTitle("RESTART CYCLE", for: .normal)
+            button.title = "Restart Cycle"
             return button
         }()
-        restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
+        restartButton.addTarget(self, action: #selector(restartButtonTapped(_:)), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: restartButton)
     }
 
@@ -74,11 +74,18 @@ class HomeViewController: UIViewController {
         present(InfoViewController(), animated: true, completion: nil)
     }
 
-    @objc private func restartButtonTapped() {
+    @objc private func restartButtonTapped(_ sender: NavigationBarButton) {
         let alert = UIAlertController(title: nil, message: homeViewModel.restartAlert, preferredStyle: .alert)
         alert.view.tintColor = .primaryButtonColor
         alert.addAction(UIAlertAction(title: homeViewModel.restart, style: .default, handler: { _ in
-            UserDefaults.standard.setValue(0, forKey: "CurrentCycleDay")
+            sender.status = .loading
+//            UserDefaults.standard.setValue(0, forKey: "CurrentCycleDay")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // TODO REMOVE
+                sender.status = .done
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                sender.status = .standby
+            }
         }))
         alert.addAction(UIAlertAction(title: homeViewModel.cancel, style: .default, handler: nil))
         present(alert, animated: true)
@@ -90,7 +97,7 @@ extension HomeViewController: UITableViewDataSource {
         switch homeViewModel.sections[section] {
         case .today:
             return 1
-        case .history:
+        case .currentCycle:
             return min(homeViewModel.currentCycleDay, maxRows)
         case .analysis:
             // We already know sections.first.symptoms.count > maxRows
@@ -106,8 +113,8 @@ extension HomeViewController: UITableViewDataSource {
             cell.title = "Day \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
             cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleNotCompleted
             return cell
-        case .history:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
+        case .currentCycle:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentCycleTableViewCell", for: indexPath) as! CurrentCycleTableViewCell
             cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
             cell.isCompleted = indexPath.row % 2 == 0 ? true : false // TODO
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
@@ -150,7 +157,7 @@ extension HomeViewController: UITableViewDelegate {
         switch homeViewModel.sections[section] {
         case let .today(title):
             header.title = title
-        case let .history(title):
+        case let .currentCycle(title):
             header.title = title
             if homeViewModel.currentCycleDay > maxRows {
                 header.buttonTitle = homeViewModel.seeAllTitle
@@ -172,8 +179,8 @@ extension HomeViewController: SectionHeaderViewDelegate {
         guard let section = section else { return }
 
         switch homeViewModel.sections[section] {
-        case .history:
-            navigationController?.pushViewController(HistoryViewController(homeViewModel: homeViewModel, trackerViewModel: trackerViewModel, dateFormatter: dateFormatter), animated: true)
+        case .currentCycle:
+            navigationController?.pushViewController(CurrentCycleViewController(homeViewModel: homeViewModel, trackerViewModel: trackerViewModel, dateFormatter: dateFormatter), animated: true)
         case .analysis:
             navigationController?.pushViewController(AnalysisViewController(viewModel: trackerViewModel, dateFormatter: dateFormatter), animated: true)
         default:

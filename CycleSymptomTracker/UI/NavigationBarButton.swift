@@ -8,6 +8,28 @@
 import UIKit
 
 class NavigationBarButton: UIButton {
+    var status: Status = .standby {
+        didSet {
+            updateStatusUI()
+        }
+    }
+
+    var title: String? {
+        didSet {
+            setTitle(title?.uppercased(), for: .normal)
+        }
+    }
+    private var loadingTitle: String = "Loading..."
+    private var errorTitle: String = "Try Again"
+    private var doneTitle: String = "Done"
+
+    enum Status {
+        case standby
+        case loading
+        case error
+        case done
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.borderColor = UIColor.primaryButtonColor.cgColor
@@ -32,5 +54,20 @@ class NavigationBarButton: UIButton {
                 layer.borderColor = UIColor.primaryButtonColor.cgColor
             }
         }
+    }
+
+    private func updateStatusUI() {
+        var newTitle = title
+        switch status {
+        case .loading:
+            newTitle = loadingTitle
+        case .error:
+            newTitle = errorTitle
+        case .done:
+            newTitle = doneTitle
+        default:
+            break
+        }
+        setTitle(newTitle?.uppercased(), for: .normal)
     }
 }
