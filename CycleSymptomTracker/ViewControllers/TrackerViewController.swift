@@ -34,11 +34,12 @@ class TrackerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .backgroundColor
 
         let saveButton: NavigationBarButton = {
             let button = NavigationBarButton()
             button.setTitle("SAVE", for: .normal)
-// TODO            button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
             return button
         }()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
@@ -55,6 +56,27 @@ class TrackerViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: tableView.rightAnchor).isActive = true
         view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func saveButtonTapped() {
+        // TODO save button tapped
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 92 {
+                view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if view.frame.origin.y != 92 {
+            view.frame.origin.y = 92
+        }
     }
 }
 
@@ -77,12 +99,12 @@ extension TrackerViewController: UITableViewDataSource {
             return cell
         case .yesNo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "YesNoTableViewCell", for: indexPath) as! YesNoTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
+            cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
             cell.title = trackerSection.symptoms[indexPath.row]
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SymptomTableViewCell", for: indexPath) as! SymptomTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
+            cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
             cell.title = trackerSection.symptoms[indexPath.row]
             return cell
         }
@@ -122,13 +144,21 @@ private class SymptomTableViewCell: UITableViewCell {
 
     private var slider: UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 0
+        slider.minimumValue = 1
         slider.maximumValue = 10
         slider.thumbTintColor = .accentColor
         slider.minimumTrackTintColor = .accentColor
         slider.maximumTrackTintColor = .borderColor
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
+    }()
+
+    private var sliderValues: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -143,12 +173,31 @@ private class SymptomTableViewCell: UITableViewCell {
         contentView.addSubview(slider)
         slider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         slider.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: slider.bottomAnchor, constant: 12).isActive = true
         contentView.rightAnchor.constraint(equalTo: slider.rightAnchor, constant: 16).isActive = true
+        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+
+        contentView.addSubview(sliderValues)
+        sliderValues.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 8).isActive = true
+        sliderValues.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: sliderValues.bottomAnchor, constant: 12).isActive = true
+        contentView.rightAnchor.constraint(equalTo: sliderValues.rightAnchor, constant: 8).isActive = true
+
+        for i in 1...10 { // minimumValue...maximumValue
+            let label = UILabel()
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.text = "\(i)"
+            label.textAlignment = .center
+            sliderValues.addArrangedSubview(label)
+        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc private func sliderValueChanged(_ sender: UISlider) {
+        // Snap to closest integer value
+        sender.value = round(sender.value)
     }
 }
 
@@ -169,6 +218,7 @@ private class NotesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .highlightColor
 
+        textView.delegate = self
         contentView.addSubview(textView)
         textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
         textView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
@@ -179,6 +229,16 @@ private class NotesTableViewCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension NotesTableViewCell: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 }
 
@@ -199,7 +259,6 @@ private class YesNoTableViewCell: UITableViewCell {
 
     private var control: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Yes", "No"])
-        control.tintColor = .red
         control.layer.borderColor = UIColor.borderColor.cgColor
         control.layer.borderWidth = 1
         control.selectedSegmentTintColor = .accentColor
@@ -219,16 +278,11 @@ private class YesNoTableViewCell: UITableViewCell {
         contentView.addSubview(control)
         control.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         control.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: control.bottomAnchor, constant: 12).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: control.bottomAnchor, constant: 16).isActive = true
         contentView.rightAnchor.constraint(equalTo: control.rightAnchor, constant: 16).isActive = true
-        control.addTarget(self, action: #selector(segmentedControlChanged), for: .touchUpInside)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    @objc private func segmentedControlChanged() {
-        // TODO
     }
 }

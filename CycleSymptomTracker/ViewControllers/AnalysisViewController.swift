@@ -33,7 +33,7 @@ class AnalysisViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Analysis"
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundColor
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -56,7 +56,7 @@ extension AnalysisViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
-        cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
+        cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
         cell.title = viewModel.sections[indexPath.section].symptoms[indexPath.row]
         return cell
     }

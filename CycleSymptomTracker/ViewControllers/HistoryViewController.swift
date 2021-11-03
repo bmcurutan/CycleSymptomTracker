@@ -34,7 +34,7 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "History"
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundColor
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -56,8 +56,8 @@ extension HistoryViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
-        cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
-        cell.isCompleted = indexPath.row % 2 == 1 ? true : false // TODO
+        cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
+        cell.isCompleted = indexPath.row % 2 == 0 ? true : false // TODO
         let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
         let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
         cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"

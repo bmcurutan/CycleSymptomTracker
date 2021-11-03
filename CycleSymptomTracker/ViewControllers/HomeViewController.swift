@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
+        view.backgroundColor = .backgroundColor
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,11 +53,11 @@ class HomeViewController: UIViewController {
             let button = UIButton(type: .custom)
             button.setImage(UIImage(systemName: "arrow.clockwise.heart"), for: .normal)
             button.setImage(UIImage(systemName: "arrow.clockwise.heart")?.withTintColor(.headerHighlightedColor, renderingMode: .alwaysOriginal), for: .highlighted)
-            button.imageView?.translatesAutoresizingMaskIntoConstraints = false
-            button.imageView?.widthAnchor.constraint(equalToConstant: 32).isActive = true
-            button.imageView?.heightAnchor.constraint(equalToConstant: 32).isActive = true
             return button
         }()
+        iconButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        iconButton.imageView?.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        iconButton.imageView?.heightAnchor.constraint(equalToConstant: 32).isActive = true
         iconButton.addTarget(self, action: #selector(iconButtonTapped), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iconButton)
 
@@ -101,14 +102,14 @@ extension HomeViewController: UITableViewDataSource {
         switch homeViewModel.sections[indexPath.section] {
         case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
-            cell.isCompleted = true // TODO
+            cell.isCompleted = false // TODO
             cell.title = "Day \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
-            cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleCompleted
+            cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleNotCompleted
             return cell
         case .history:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
-            cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
-            cell.isCompleted = indexPath.row % 2 == 1 ? true : false // TODO
+            cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
+            cell.isCompleted = indexPath.row % 2 == 0 ? true : false // TODO
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
             let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
             cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
@@ -122,8 +123,9 @@ extension HomeViewController: UITableViewDataSource {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell", for: indexPath) as! AnalysisTableViewCell
-                cell.backgroundColor = indexPath.row % 2 == 1 ? .backgroundColor : .white
+                cell.backgroundColor = indexPath.row % 2 == 0 ? .backgroundColor : .white
                 cell.title = trackerViewModel.sections.first?.symptoms[indexPath.row - 1]
+                cell.isUserInteractionEnabled = false
                 return cell
             }
         }

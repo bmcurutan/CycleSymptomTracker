@@ -17,7 +17,7 @@ class HomeViewModel {
     var todaySubtitleNotCompleted: String = "Tap to track today's symptoms"
     var todaySubtitleCompleted: String = "Tap to see today's symptoms"
 
-    var restartAlert: String = "Are you sure you want to restart cycle?"
+    var restartAlert: String = "Are you sure you want to restart cycle? Previously saved data will be lost."
     var restart: String = "Restart"
     var cancel: String = "Cancel"
 }
