@@ -51,8 +51,9 @@ class HomeViewController: UIViewController {
     private func setUpNavigationBar() {
         let iconButton: UIButton = {
             let button = UIButton(type: .custom)
-            button.setImage(UIImage(systemName: "arrow.clockwise.heart"), for: .normal)
-            button.setImage(UIImage(systemName: "arrow.clockwise.heart")?.withTintColor(.headerHighlightedColor, renderingMode: .alwaysOriginal), for: .highlighted)
+            let image = UIImage(systemName: "arrow.clockwise.heart")
+            button.setImage(image, for: .normal)
+            button.setImage(image?.withTintColor(.headerHighlightedColor, renderingMode: .alwaysOriginal), for: .highlighted)
             return button
         }()
         iconButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
