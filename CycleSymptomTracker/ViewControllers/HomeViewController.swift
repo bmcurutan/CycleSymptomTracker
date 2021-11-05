@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundView = UIView(frame: tableView.frame)
-        tableView.backgroundView?.backgroundColor = .white
+        tableView.backgroundView?.backgroundColor = .backgroundColor
         tableView.backgroundColor = .backgroundColor
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
