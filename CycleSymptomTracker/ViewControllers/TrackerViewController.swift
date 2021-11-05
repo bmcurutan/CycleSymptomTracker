@@ -187,6 +187,7 @@ private class SymptomTableViewCell: UITableViewCell {
             label.font = UIFont.systemFont(ofSize: 14)
             label.text = "\(i)"
             label.textAlignment = .center
+            label.textColor = .primaryTextColor
             sliderValues.addArrangedSubview(label)
         }
     }
@@ -280,6 +281,10 @@ private class YesNoTableViewCell: UITableViewCell {
         control.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
         contentView.bottomAnchor.constraint(equalTo: control.bottomAnchor, constant: 16).isActive = true
         contentView.rightAnchor.constraint(equalTo: control.rightAnchor, constant: 16).isActive = true
+
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.primaryTextColor]
+        UISegmentedControl.appearance().setTitleTextAttributes(attributes, for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes(attributes, for: .selected)
     }
 
     required init?(coder: NSCoder) {

@@ -90,10 +90,11 @@ extension CurrentCycleViewController: UITableViewDataSource {
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
+
         header.addSubview(infoLabel)
-        infoLabel.topAnchor.constraint(equalTo: header.topAnchor, constant: 8).isActive = true
+        infoLabel.topAnchor.constraint(equalTo: header.topAnchor, constant: 12).isActive = true
         infoLabel.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 16).isActive = true
-        header.bottomAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 8).isActive = true
+        header.bottomAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 12).isActive = true
         header.rightAnchor.constraint(equalTo: infoLabel.rightAnchor, constant: 16).isActive = true
 
         return header

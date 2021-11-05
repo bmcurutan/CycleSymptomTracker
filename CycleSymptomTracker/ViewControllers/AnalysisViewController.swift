@@ -35,6 +35,14 @@ class AnalysisViewController: UIViewController {
         title = "Analysis"
         view.backgroundColor = .backgroundColor
 
+        let exportButton: NavigationBarButton = {
+            let button = NavigationBarButton()
+            button.title = "Export"
+            return button
+        }()
+        exportButton.addTarget(self, action: #selector(exportButtonTapped), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: exportButton)
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -46,6 +54,10 @@ class AnalysisViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 16).isActive = true
         view.rightAnchor.constraint(equalTo: tableView.rightAnchor).isActive = true
+    }
+
+    @objc private func exportButtonTapped() {
+        // TODO export button
     }
 }
 
@@ -71,9 +83,42 @@ extension AnalysisViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = SectionHeaderView()
-        header.title = viewModel.sections[section].title
-        return header
+        let sectionHeader = SectionHeaderView()
+        sectionHeader.title = viewModel.sections[section].title
+        sectionHeader.translatesAutoresizingMaskIntoConstraints = false
+
+        switch section {
+        case 0:
+            let header = UIView()
+            header.backgroundColor = .highlightColor
+
+            let infoLabel: UILabel = {
+                let label = UILabel()
+                label.font = UIFont.systemFont(ofSize: 14)
+                label.lineBreakMode = .byWordWrapping
+                label.numberOfLines = 0
+                label.text = viewModel.info
+                label.textColor = .secondaryTextColor
+                label.translatesAutoresizingMaskIntoConstraints = false
+                return label
+            }()
+            
+            header.addSubview(infoLabel)
+            infoLabel.topAnchor.constraint(equalTo: header.topAnchor, constant: 12).isActive = true
+            infoLabel.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 16).isActive = true
+            header.rightAnchor.constraint(equalTo: infoLabel.rightAnchor, constant: 16).isActive = true
+
+            header.addSubview(sectionHeader)
+            sectionHeader.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 12).isActive = true
+            sectionHeader.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
+            header.bottomAnchor.constraint(equalTo: sectionHeader.bottomAnchor).isActive = true
+            header.rightAnchor.constraint(equalTo: sectionHeader.rightAnchor).isActive = true
+
+            return header
+
+        default:
+            return sectionHeader
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
