@@ -21,7 +21,7 @@ class NavigationBarButton: UIButton {
     }
     private var loadingTitle: String = "Loading..."
     private var errorTitle: String = "Try Again"
-    private var doneTitle: String = "Done"
+    private var doneTitle: String = "✓" // Checkmark
 
     enum Status {
         case standby

@@ -39,7 +39,7 @@ class TrackerViewController: UIViewController {
         let saveButton: NavigationBarButton = {
             let button = NavigationBarButton()
             button.title = "Save"
-            button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(saveButtonTapped(_:)), for: .touchUpInside)
             return button
         }()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
@@ -61,8 +61,9 @@ class TrackerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc private func saveButtonTapped() {
+    @objc private func saveButtonTapped(_ sender: NavigationBarButton) {
         // TODO save button tapped
+        sender.status = .done
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
