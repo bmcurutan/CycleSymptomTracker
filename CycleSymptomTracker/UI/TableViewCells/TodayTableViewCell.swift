@@ -8,7 +8,13 @@
 import Charts
 import UIKit
 
+protocol TodayTableViewCellDelegate {
+    func cycleDateCardTapped(with type: TodayCardType)
+}
+
 class TodayTableViewCell: UITableViewCell {
+    var delegate: TodayTableViewCellDelegate?
+
     var isCompleted: Bool = false {
         didSet {
             icon.image = isCompleted ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "plus.circle.fill")
@@ -27,18 +33,20 @@ class TodayTableViewCell: UITableViewCell {
         }
     }
 
-    private var cycleCardView: TodayCardView = {
+    private var startDateCardView: TodayCardView = {
         let view = TodayCardView()
-        view.topLabel.text = "CYCLE LENGTH"
-        view.bottomLabel.text = "30 days"
+        view.cardType = .start
+        view.topLabel.text = "CYCLE START DATE"
+        view.bottomLabel.text = "Nov 1, 2021" // TODO start date
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private var trackedCardView: TodayCardView = {
+    private var endDateCardView: TodayCardView = {
         let view = TodayCardView()
-        view.topLabel.text = "DAYS TRACKED"
-        view.bottomLabel.text = "\(UserDefaults.standard.integer(forKey: "CurrentCycleDay"))"
+        view.cardType = .end
+        view.topLabel.text = "CYCLE END DATE"
+        view.bottomLabel.text = "Nov 30, 2021" // TODO end date
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -52,7 +60,7 @@ class TodayTableViewCell: UITableViewCell {
 
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .headerColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -60,7 +68,7 @@ class TodayTableViewCell: UITableViewCell {
 
     private var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .primaryTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -77,17 +85,22 @@ class TodayTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         let cardWidth = (UIScreen.main.bounds.width - 16 - 8 - 16) / 2
-        contentView.addSubview(cycleCardView)
-        cycleCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        cycleCardView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-        cycleCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
-        contentView.addSubview(trackedCardView)
-        trackedCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        trackedCardView.leftAnchor.constraint(equalTo: cycleCardView.rightAnchor, constant: 8).isActive = true
-        trackedCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
+        let startDateTap = UITapGestureRecognizer(target: self, action: #selector(startDateCardTapped))
+        startDateCardView.addGestureRecognizer(startDateTap)
+        contentView.addSubview(startDateCardView)
+        startDateCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        startDateCardView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        startDateCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
+
+        let endDateTap = UITapGestureRecognizer(target: self, action: #selector(endDateCardTapped))
+        endDateCardView.addGestureRecognizer(endDateTap)
+        contentView.addSubview(endDateCardView)
+        endDateCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        endDateCardView.leftAnchor.constraint(equalTo: startDateCardView.rightAnchor, constant: 8).isActive = true
+        endDateCardView.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
 
         contentView.addSubview(icon)
-        icon.topAnchor.constraint(equalTo: cycleCardView.bottomAnchor, constant: 16).isActive = true
+        icon.topAnchor.constraint(equalTo: endDateCardView.bottomAnchor, constant: 16).isActive = true
         icon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
         icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
         icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -109,7 +122,7 @@ class TodayTableViewCell: UITableViewCell {
         contentView.rightAnchor.constraint(equalTo: chartView.rightAnchor, constant: 16).isActive = true
         chartView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 
-        // TODO clean up / remove
+        // TODO remove test data
         var lineChartEntry = [ChartDataEntry]()
         for i in 0..<12 {
             let value = ChartDataEntry(x: Double(i), y: Double(i))
@@ -132,45 +145,12 @@ class TodayTableViewCell: UITableViewCell {
         super.layoutSubviews()
         contentView.addVerticalGradient()
     }
-}
 
-private class TodayCardView: UIView {
-    var topLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textAlignment = .center
-        label.textColor = .headerHighlightedColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    var bottomLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        label.textColor = .headerColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        layer.cornerRadius = 8
-        backgroundColor = .white
-
-        addSubview(topLabel)
-        topLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        topLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        rightAnchor.constraint(equalTo: topLabel.rightAnchor, constant: 16).isActive = true
-
-        addSubview(bottomLabel)
-        bottomLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 4).isActive = true
-        bottomLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        rightAnchor.constraint(equalTo: bottomLabel.rightAnchor, constant: 16).isActive = true
-        bottomAnchor.constraint(equalTo: bottomLabel.bottomAnchor, constant: 8).isActive = true
+    @objc private func startDateCardTapped() {
+        delegate?.cycleDateCardTapped(with: .start)
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @objc private func endDateCardTapped() {
+        delegate?.cycleDateCardTapped(with: .end)
     }
 }

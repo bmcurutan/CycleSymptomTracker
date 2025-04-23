@@ -8,18 +8,21 @@
 import Foundation
 
 class HomeViewModel {
-    var sections: [HomeSection] = [.today("Today"), .currentCycle("Current Cycle"), .analysis("Analysis")]
+    let title = "Cycle Symptom Tracker"
+    let sections: [HomeSection] = [.today("Today"), .currentCycle("Current Cycle"), .analysis("Analysis")]
 
-    var currentCycleDay: Int = UserDefaults.standard.integer(forKey: "CurrentCycleDay") 
-    var numCycleDays: Int = 30
+    let currentCycleDay = UserDefaults.standard.integer(forKey: "CurrentCycleDay")
+    let numCycleDays = 40
 
-    var seeAllTitle: String = "See All →"
-    var todaySubtitleNotCompleted: String = "Tap to track today's symptoms"
-    var todaySubtitleCompleted: String = "Tap to see today's symptoms"
+    let seeAllTitle = "See All →"
+    let todaySubtitleNotCompleted = "Tap to track today's symptoms"
+    let todaySubtitleCompleted = "Tap to see today's symptoms"
 
-    var restartAlert: String = "Are you sure you want to restart cycle? Previously saved data will be lost."
-    var restart: String = "Restart"
-    var cancel: String = "Cancel"
+    let startDateAlert = "Are you sure you want to update the start date for the current cycle?"
+    let endDateAlert = "Are you sure you want to update the end date for the current cycle?"
+    // TODO current/ongoing cycle vs cycle ended
+    let update = "Update"
+    let cancel = "Cancel"
 }
 
 enum HomeSection: Equatable {

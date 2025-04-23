@@ -72,7 +72,7 @@ extension CurrentCycleViewController: UITableViewDataSource {
         cell.isCompleted = indexPath.row % 2 == 0 ? true : false // TODO
         let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
         let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
-        cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
+        cell.title = "Day \(indexPath.row + 1) of 40 - \(dateFormatter.string(from: modifiedDate).uppercased())"
         return cell
     }
 

@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
 
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "MMM d, yyyy"
         return formatter
     }()
 
@@ -48,9 +48,18 @@ class HomeViewController: UIViewController {
 
         // TODO remove
         UserDefaults.standard.setValue(10, forKey: "CurrentCycleDay")
+
+        if !UserDefaults.standard.bool(forKey: "InfoViewControllerSeen") {
+            present(InfoViewController(), animated: true, completion: nil)
+            UserDefaults.standard.setValue(true, forKey: "InfoViewControllerSeen")
+        }
+
+        // TODO when cycle ends, display reminder to choose new dates
     }
 
     private func setUpNavigationBar() {
+        title = homeViewModel.title
+
         let iconButton: UIButton = {
             let button = UIButton(type: .custom)
             let image = UIImage(systemName: "arrow.clockwise.heart")
@@ -58,40 +67,13 @@ class HomeViewController: UIViewController {
             button.setImage(image?.withTintColor(.headerHighlightedColor, renderingMode: .alwaysOriginal), for: .highlighted)
             return button
         }()
-        iconButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
-        iconButton.imageView?.widthAnchor.constraint(equalToConstant: 32).isActive = true
-        iconButton.imageView?.heightAnchor.constraint(equalToConstant: 32).isActive = true
         iconButton.addTarget(self, action: #selector(iconButtonTapped), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iconButton)
 
-        let restartButton: NavigationBarButton = {
-            let button = NavigationBarButton()
-            button.title = "Restart Cycle"
-            return button
-        }()
-        restartButton.addTarget(self, action: #selector(restartButtonTapped(_:)), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: restartButton)
     }
 
     @objc private func iconButtonTapped() {
         present(InfoViewController(), animated: true, completion: nil)
-    }
-
-    @objc private func restartButtonTapped(_ sender: NavigationBarButton) {
-        let alert = UIAlertController(title: nil, message: homeViewModel.restartAlert, preferredStyle: .alert)
-        alert.view.tintColor = .primaryButtonColor
-        alert.addAction(UIAlertAction(title: homeViewModel.restart, style: .default, handler: { _ in
-            sender.status = .loading
-//            UserDefaults.standard.setValue(0, forKey: "CurrentCycleDay")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // TODO REMOVE
-                sender.status = .done
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                sender.status = .standby
-            }
-        }))
-        alert.addAction(UIAlertAction(title: homeViewModel.cancel, style: .default, handler: nil))
-        present(alert, animated: true)
     }
 }
 
@@ -112,8 +94,9 @@ extension HomeViewController: UITableViewDataSource {
         switch homeViewModel.sections[indexPath.section] {
         case .today:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodayTableViewCell", for: indexPath) as! TodayTableViewCell
+            cell.delegate = self
             cell.isCompleted = false // TODO
-            cell.title = "Day \(homeViewModel.currentCycleDay + 1) - \(dateFormatter.string(from: Date()).uppercased())"
+            cell.title = "Day \(homeViewModel.currentCycleDay + 1) of 40 - \(dateFormatter.string(from: Date()))"
             cell.subtitle = cell.isCompleted ? homeViewModel.todaySubtitleCompleted : homeViewModel.todaySubtitleNotCompleted
             return cell
         case .currentCycle:
@@ -122,7 +105,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.isCompleted = indexPath.row % 2 == 0 ? true : false // TODO
             let delta = -tableView.numberOfRows(inSection: indexPath.section) + indexPath.row
             let modifiedDate = Calendar.current.date(byAdding: .day, value: delta, to: Date())!
-            cell.title = "Day \(indexPath.row + 1) - \(dateFormatter.string(from: modifiedDate).uppercased())"
+            cell.title = "Day \(indexPath.row + 1) of 40 - \(dateFormatter.string(from: modifiedDate))"
             return cell
         case .analysis:
             let trackerSection = trackerViewModel.sections.first
@@ -189,5 +172,21 @@ extension HomeViewController: SectionHeaderViewDelegate {
         default:
             break
         }
+    }
+}
+
+extension HomeViewController: TodayTableViewCellDelegate {
+    func cycleDateCardTapped(with type: TodayCardType) {
+        let message = type == .start ? homeViewModel.startDateAlert : homeViewModel.endDateAlert
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.view.tintColor = .primaryButtonColor
+        alert.addAction(UIAlertAction(title: homeViewModel.update, style: .default, handler: { [weak self] _ in
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = .date
+            datePicker.tintColor = .primaryButtonColor
+            self?.view.addSubview(datePicker)
+        }))
+        alert.addAction(UIAlertAction(title: homeViewModel.cancel, style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }

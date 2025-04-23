@@ -31,6 +31,7 @@
 		67D0C06C272FAE1F003B0D09 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */; };
 		67D574D12731D0A6002426C6 /* SectionSubheaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D574D02731D0A6002426C6 /* SectionSubheaderTableViewCell.swift */; };
 		67D574D42731D198002426C6 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D574D32731D198002426C6 /* AnalysisViewController.swift */; };
+		67D574E827364700002426C6 /* TodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D574E727364700002426C6 /* TodayCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		67D0C06B272FAE1F003B0D09 /* TodayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		67D574D02731D0A6002426C6 /* SectionSubheaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSubheaderTableViewCell.swift; sourceTree = "<group>"; };
 		67D574D32731D198002426C6 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
+		67D574E727364700002426C6 /* TodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCardView.swift; sourceTree = "<group>"; };
 		DD2069CC5205B45AFA4C5F54 /* Pods_CycleSymptomTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleSymptomTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 				67A5C1352731BA2300974EE5 /* TableViewCells */,
 				67A4BFA9272F688B0050079A /* SectionHeaderView.swift */,
 				67D0C067272F9DD0003B0D09 /* NavigationBarButton.swift */,
+				67D574E727364700002426C6 /* TodayCardView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				67A4BFA7272F5BFB0050079A /* UIColor+Ext.swift in Sources */,
 				678CE683272DE17B00994B9B /* HomeViewController.swift in Sources */,
 				678CE686272DE1B500994B9B /* HomeViewModel.swift in Sources */,
+				67D574E827364700002426C6 /* TodayCardView.swift in Sources */,
 				67A4BFAA272F688C0050079A /* SectionHeaderView.swift in Sources */,
 				67A5C1332731BA1700974EE5 /* CurrentCycleTableViewCell.swift in Sources */,
 				678CE66D272DDEFE00994B9B /* TrackerViewController.swift in Sources */,
